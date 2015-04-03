@@ -1,0 +1,13 @@
+  [1m[36m (131.9ms)[0m  [1mDROP DATABASE IF EXISTS "urfantasy_test"[0m
+  [1m[35m (1056.5ms)[0m  CREATE DATABASE "urfantasy_test" ENCODING = 'utf-8'
+  [1m[36mSQL (0.3ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (9.0ms)[0m  CREATE TABLE "urf_ids_requests" ("id" serial primary key, "region" character varying, "bucket_time" integer, "response" json, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) 
+  [1m[36m (1.9ms)[0m  [1mCREATE  INDEX  "index_urf_ids_requests_on_region_and_bucket_time" ON "urf_ids_requests" USING btree ("region", "bucket_time")[0m
+  [1m[35m (4.8ms)[0m  CREATE TABLE "urf_matches" ("id" serial primary key, "region" character varying, "bucket_time" integer, "response" jsonb, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) 
+  [1m[36m (2.0ms)[0m  [1mCREATE  INDEX  "index_urf_matches_on_region_and_bucket_time" ON "urf_matches" USING btree ("region", "bucket_time")[0m
+  [1m[35m (2.4ms)[0m  CREATE TABLE "schema_migrations" ("version" character varying NOT NULL) 
+  [1m[36m (2.4ms)[0m  [1mCREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")[0m
+  [1m[35m (0.4ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150403003349')[0m
+  [1m[35m (0.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150402081123')
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m

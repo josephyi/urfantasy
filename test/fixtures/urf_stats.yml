@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  bucket_time: 1
+  queued: false
+
+two:
+  bucket_time: 1
+  queued: false
