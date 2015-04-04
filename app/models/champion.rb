@@ -1,4 +1,6 @@
 class Champion < OpenStruct
+  extend Memoist
+
   POINTS_PER_KILL = 2
   POINTS_PER_DEATH = -0.5
   POINTS_PER_ASSIST = 1.5
@@ -11,6 +13,7 @@ class Champion < OpenStruct
   def champion
     Taric.client(region:'na').static_champion(id: self.championId)
   end
+  memoize :champion
 
   def total_score
     kill_score +
@@ -42,7 +45,7 @@ class Champion < OpenStruct
   end
 
   def game_bonus
-    GAME_BONUS if self.stats['kills'] > 10 || self.stats['assists'] > 10
+    self.stats['kills'] > 10 || self.stats['assists'] > 10 ? GAME_BONUS : 0
   end
 
 end
