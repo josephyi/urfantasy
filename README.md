@@ -16,14 +16,14 @@ Get an API key from the [Riot Games Developer] site.
     * If you already have Docker, be sure it's updated to v1.5.
     * If you're using [Kitematic] on OSX, use the terminal from there.
   * [Docker Compose]:
-    * Linux/OSX:     
+    * Linux/OSX:
             curl -L https://github.com/docker/compose/releases/download/1.1.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
             chmod +x /usr/local/bin/docker-compose
-    * Windows: 
+    * Windows:
         * A native version of Compose is not available, but you can try it in a [Compose Docker container].
 
 ## Setup .env file
-From the project's root folder, copy the `.env.template` file to `.env` and change as necessary. Be sure to define your `RIOT_API_KEY`. 
+From the project's root folder, copy the `.env.template` file to `.env` and change as necessary. Be sure to define your `RIOT_API_KEY`.
 
 ## Build
 From the project's root folder, build:
@@ -33,18 +33,21 @@ From the project's root folder, build:
 After building, run it (ctrl+c to exit):
 
     docker-compose up
-    
+
 Open a separate terminal instance and run migrations:
 
     docker-compose run app rake db:create
     docker-compose run app rake db:migrate
-    
-Visit http://localhost:3000 to see if it's running.     
+
+Visit http://localhost:3000 to see if it's running.
 
 ## Import Process
 
     docker-compose run app rake urfantasy:queue_all
-   
+
+docker exec -it urfantasy_postgres_1 psql -U postgres
+\connect urfantasy_dev
+
 [Riot Games Developer]:https://developer.riotgames.com/
 [Docker]:https://docs.docker.com/installation/
 [Docker Compose]:https://docs.docker.com/compose/
