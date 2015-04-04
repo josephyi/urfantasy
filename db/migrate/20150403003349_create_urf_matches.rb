@@ -10,5 +10,6 @@ class CreateUrfMatches < ActiveRecord::Migration
     end
 
     add_index :urf_matches, [:region, :match_id, :bucket_time]
+    add_index :urf_matches, :response, using: :gin
   end
 end
