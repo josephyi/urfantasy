@@ -34,15 +34,16 @@ After building, run it (ctrl+c to exit):
 
     docker-compose up
     
-Open a separate terminal tnstance and run migrations: 
+Open a separate terminal instance and run migrations:
 
-    docker-compose run urfantasy rake db:create
+    docker-compose run app rake db:create
+    docker-compose run app rake db:migrate
     
 Visit http://localhost:3000 to see if it's running.     
 
 ## Import Process
 
-    docker-compose run urfantasy rake urfantasy:queue_all
+    docker-compose run app rake urfantasy:queue_all
    
 [Riot Games Developer]:https://developer.riotgames.com/
 [Docker]:https://docs.docker.com/installation/
