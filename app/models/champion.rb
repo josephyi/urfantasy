@@ -15,7 +15,8 @@ class Champion < OpenStruct
       total_score: self.total_score,
       id: self.championId,
       name: self.champion['name'],
-      key: self.champion['key']
+      key: self.champion['key'],
+      stats: self.stats
     }
   end
 

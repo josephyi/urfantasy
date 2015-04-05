@@ -7,8 +7,18 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <%= react_component('Header', {}) %>
 
-<%= yield %>
+  <div class="ui grid">
+    <div class="four wide column">
+      <%= react_component('Menu', {}) %>
+    </div>
+    <div class="twelve wide column">
+      <%= yield %>
+    </div>
+  </div>
+
+  <div id="modal"></div>
 
 </body>
 </html>

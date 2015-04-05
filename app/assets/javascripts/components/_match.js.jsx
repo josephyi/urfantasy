@@ -1,5 +1,6 @@
 var Match = React.createClass({
   getInitialState: function () {
+    console.log(this.props);
     return _.assign(this.props, {revealed:false});
   },
 
@@ -11,7 +12,6 @@ var Match = React.createClass({
       type: "GET",
       dataType: "json",
       success: function ( data ) {
-        console.log(data);
         this.setState(data);
       }.bind(this)
     });
@@ -24,7 +24,6 @@ var Match = React.createClass({
       teams = _.sortByOrder(this.state.match.teams,'total_score', false)
       _.forEach(teams, function(team) {
         team.champions = _.sortByOrder(team.champions,'total_score', false);
-        console.log(_.sortByOrder(team.champions,'total_score', false));
       });
 
       return {

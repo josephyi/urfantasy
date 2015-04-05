@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   # root 'welcome#index'
 
   get 'test' => 'test#index'
+  get 'scoreboard' => 'scoreboard#index'
 
 
   # Example of named route that can be invoked with purchase_url(id: product.id)

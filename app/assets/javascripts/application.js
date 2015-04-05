@@ -14,6 +14,8 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require vendor/low_dash
+//= require vendor/pubsub
 //= require react
 //= require react_ujs
+//= require semantic-ui
 //= require_tree .
