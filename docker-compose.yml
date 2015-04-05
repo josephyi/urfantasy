@@ -1,3 +1,7 @@
+memcached:
+  image: memcached
+  ports:
+    - "11211"
 postgresData:
   image: postgres
   volumes:
@@ -40,3 +44,4 @@ app:
   links:
     - postgres
     - redis
+    - memcached

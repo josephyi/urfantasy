@@ -29,7 +29,8 @@ gem 'daemons-rails', '~> 1.2'
 gem 'puma', '~> 2.11'
 gem 'taric', '~> 0.1.14'
 gem 'sinatra'
-
+gem 'dalli', '~> 2.7'
+gem 'react-rails', '~> 1.0.0.pre', github: 'reactjs/react-rails'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', '~>4.0.4'
