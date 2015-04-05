@@ -30,6 +30,7 @@ class Champion < OpenStruct
     triple_kill_score +
     quadra_kill_score +
     penta_kill_score +
+    creep_score +
     game_bonus
   end
 
@@ -51,6 +52,10 @@ class Champion < OpenStruct
 
   def penta_kill_score
     self.stats['pentaKills'] * POINTS_PER_PENTA_KILL
+  end
+
+  def creep_score
+    self.stats['minionsKilled'] * POINTS_PER_CREEP_KILL
   end
 
   def game_bonus
