@@ -13,4 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require vendor/low_dash
+//= require react
+//= require react_ujs
 //= require_tree .

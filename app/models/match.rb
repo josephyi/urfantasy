@@ -1,15 +1,27 @@
 class Match < OpenStruct
   extend Memoist
 
-  def teams
-    to_ret = []
-    # Teams method already exists because that is the name of the json property
-    super.each do |team|
-      to_ret << Team.new(team)
+  def initialize(args)
+    super
+
+    # Shitty exponential time, but whatevs
+    teams.map!{|team| Team.new(team)}
+    teams.each do |team|
+      to_ret = []
+      champions.each do |champion|
+        to_ret << champion if team.teamId == champion.teamId
+      end
+      team.champions = to_ret
     end
-    to_ret
   end
-  memoize :teams
+
+  def to_hash
+    {
+      teams: self.teams,
+      leaderboard: self.leaderboard,
+      matchId: matchId
+    }
+  end
 
   def champions
     to_ret = []

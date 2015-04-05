@@ -5,6 +5,15 @@ class Team < OpenStruct
   POINTS_PER_FIRST_BLOOD = 2
   POINTS_PER_TOWER = 1
   POINTS_PER_30MIN = 2
+  attr_accessor :champions
+
+  def to_hash
+    {
+      total_score: self.total_score,
+      id: self.teamId,
+      champions: self.champions
+    }
+  end
 
   def total_score
     win_score +
