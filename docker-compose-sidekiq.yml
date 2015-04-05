@@ -8,11 +8,31 @@ postgresData:
     - /var/lib/postgresql/data
   command: echo
 postgres:
-  image: postgres
+  build: dockerfiles/postgres
   ports:
     - "5432"
   volumes_from:
     - postgresData
+redisData:
+  image: redis
+  volumes:
+    - /data
+  command: echo
+redis:
+  image: redis
+  ports:
+    - "6379"
+  volumes_from:
+    - redisData
+sidekiq:
+  build: .
+  command: bundle exec sidekiq -q zilean -q nunu -q chogath
+  volumes:
+    - .:/app
+  env_file: .env
+  links:
+    - postgres
+    - redis
 app:
   build: .
   command: bundle exec rails s -p 3000 -b '0.0.0.0'
@@ -23,4 +43,5 @@ app:
     - "3000:3000"
   links:
     - postgres
+    - redis
     - memcached
