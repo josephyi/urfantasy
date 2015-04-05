@@ -10,6 +10,15 @@ class Champion < OpenStruct
   POINTS_PER_PENTA_KILL = 10
   GAME_BONUS = 2
 
+  def to_hash
+    {
+      total_score: self.total_score,
+      id: self.championId,
+      name: self.champion['name'],
+      key: self.champion['key']
+    }
+  end
+
   def champion
     Taric.client(region:'na').static_champion(id: self.championId)
   end
