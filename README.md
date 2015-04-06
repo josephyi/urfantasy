@@ -45,8 +45,20 @@ Visit http://localhost:3000 to see if it's running.
 
     docker-compose run app rake urfantasy:queue_all
 
-docker exec -it urfantasy_postgres_1 psql -U postgres
-\connect urfantasy_dev
+## Useful Commands
+
+    # console
+    docker exec -it urfantasy_app_1 rails c
+
+    # bundle for new gems
+    docker exec -it urfantasy_app_1 bundle
+
+    # migrations
+    docker exec -it urfantasy_app_1 rake db:migrate
+
+    # postgres
+    docker exec -it urfantasy_postgres_1 psql -U postgres urfantasy_dev
+
 
 [Riot Games Developer]:https://developer.riotgames.com/
 [Docker]:https://docs.docker.com/installation/
