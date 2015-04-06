@@ -35,7 +35,7 @@ class UrfStatAggregator
       response = match.response
 
       # update bans
-      merge_ban_stats!(stats: stats, teams: response['teams'.freeze]) rescue puts "broken on #{match.id}"
+      merge_ban_stats!(stats: stats, teams: response['teams'.freeze])
 
       # crappy hash logic for mirror match count :/
       hash = Hash.new { |hash, key| hash[key] = [] }
