@@ -126,4 +126,9 @@ module StaticData
       429=>'Kalista',
       432=>'Bard'
   }.freeze
+
+  # For realtime data, use:
+  # Taric.client(region: 'na').static_champions(data_by_id: true)['data'].keys.map(&:to_i).sort
+  CHAMPION_IDS = CHAMPIONS_ID_TO_NAME.keys.freeze
+  freeze
 end

@@ -11,10 +11,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150405070538) do
+ActiveRecord::Schema.define(version: 20150406020307) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "urf_day_stats", force: :cascade do |t|
+    t.integer "champion_id"
+    t.string  "region"
+    t.integer "urf_day"
+    t.integer "hour_in_day"
+    t.integer "kills"
+    t.integer "deaths"
+    t.integer "assists"
+    t.integer "double_kills"
+    t.integer "triple_kills"
+    t.integer "quadra_kills"
+    t.integer "penta_kills"
+    t.integer "killing_spree_max"
+    t.integer "first_blood"
+    t.integer "minions_killed"
+    t.integer "bans"
+    t.integer "wins"
+    t.integer "losses"
+    t.integer "mirror_matches"
+  end
+
+  add_index "urf_day_stats", ["champion_id", "urf_day", "hour_in_day", "region"], name: "urf_day_stats_idx", using: :btree
 
   create_table "urf_ids_requests", force: :cascade do |t|
     t.string   "region"
@@ -36,7 +59,6 @@ ActiveRecord::Schema.define(version: 20150405070538) do
   end
 
   add_index "urf_matches", ["region", "match_id", "bucket_time"], name: "index_urf_matches_on_region_and_match_id_and_bucket_time", using: :btree
-  add_index "urf_matches", ["response"], name: "index_urf_matches_on_response", using: :gin
   add_index "urf_matches", ["response"], name: "urf_matches_gin_path_idx", using: :gin
 
 end

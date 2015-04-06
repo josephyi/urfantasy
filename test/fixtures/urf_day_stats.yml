@@ -1,0 +1,39 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  champion_id: 
+  region: 
+  urf_day: 
+  hour_in_day: 
+  kills: 
+  deaths: 
+  assists: 
+  double_kills: 
+  triple_kills: 
+  quadra_kills: 
+  penta_kills: 
+  killing_spree_max: 
+  first_blood: 
+  minions_killed: 
+  picks: 
+  bans: 
+  wins: 
+
+two:
+  champion_id: 
+  region: 
+  urf_day: 
+  hour_in_day: 
+  kills: 
+  deaths: 
+  assists: 
+  double_kills: 
+  triple_kills: 
+  quadra_kills: 
+  penta_kills: 
+  killing_spree_max: 
+  first_blood: 
+  minions_killed: 
+  picks: 
+  bans: 
+  wins: 
