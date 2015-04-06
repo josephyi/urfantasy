@@ -1,20 +1,4 @@
 @Header = React.createClass
-  getInitialState: ->
-    { modalIsOpen: false }
-
-  componentDidMount: ->
-    @_subscribeToEvents()
-
-  componentWillUnmount: ->
-    @_unsubscribeFromEvents()
-
-  _subscribeToEvents: ->
-    # When the reset button is clicked...
-    PubSub.subscribe 'open:modal', ()=>
-      console.log('yo')
-
-  _unsubscribeFromEvents: ->
-    PubSub.unsubscribe 'open:modal'
 
   render: ->
     return (

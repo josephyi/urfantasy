@@ -15,6 +15,8 @@
 //= require turbolinks
 //= require vendor/low_dash
 //= require vendor/pubsub
+//= require helpers/animation
+//= require helpers/css
 //= require react
 //= require react_ujs
 //= require semantic-ui

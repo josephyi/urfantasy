@@ -1,12 +1,19 @@
 @LoginButton = React.createClass
   openModal: (event) ->
     event.preventDefault()
-    PubSub.publish 'open:modal'
-    console.log('hi')
-    React.render(
-      <LoginModal />, document.getElementById('modal')
-      )
+    PubSub.publish 'modal', @modalArgs()
 
+  modalArgs: ->
+    isOpen: true
+    title: 'Login/Sign up'
+    content: @modalContent()
+    footer: @modalFooter()
+
+  modalContent: ->
+    return <LoginModalContent />
+
+  modalFooter: ->
+    return <LoginModalFooter />
 
   render: ->
     if @props.loggedIn
