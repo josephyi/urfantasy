@@ -1,4 +1,6 @@
 class UrfStatAggregator
+  CHAMPION_ID_KEY = 'championId'.freeze
+
   def self.aggregate(region:, day:, hour:, matches:)
     process_matches!(stats: init_stats(region: region, hour: hour, day: day), matches: matches)
   end
@@ -33,22 +35,24 @@ class UrfStatAggregator
       response = match.response
 
       # update bans
-      merge_ban_stats!(stats: stats, teams: response['teams'.freeze])
+      merge_ban_stats!(stats: stats, teams: response['teams'.freeze]) rescue puts "broken on #{match.id}"
 
       # crappy hash logic for mirror match count :/
       hash = Hash.new { |hash, key| hash[key] = [] }
       response['participants'.freeze].each{|participant|
         merge_participant_stats!(stats: stats, participant: participant)
-        hash[participant['teamId']] << participant['championId']
+        hash[participant['teamId']] << participant[CHAMPION_ID_KEY]
       }
       merge_mirror_match_stats(stats: stats, team_champ_hash: hash)
     end
     stats
   end
 
+
+
   def self.merge_ban_stats!(stats:, teams:)
-    teams.flat_map{|team| team['bans'.freeze]}
-        .map{|ban| ban['championId'.freeze]}
+    teams.flat_map{|team| team['bans'.freeze]}.compact
+        .map{|ban| ban[CHAMPION_ID_KEY]}
         .each{|champion_id| stats[champion_id].merge!(bans: 1){|k1,v1,v2| v1 + v2 }}
     stats
   end
@@ -68,6 +72,7 @@ class UrfStatAggregator
         wins: participant_stats['winner'.freeze] ? 1 : 0,
         losses: participant_stats['winner'.freeze] ? 0 : 1
     ){|k1,v1,v2| v1 + v2 }
+    stats[participant[CHAMPION_ID_KEY]].merge!(killing_spree_max: participant_stats['killingSprees']){|k1, v1, v2| [v1, v2].max }
   end
 
   def self.merge_mirror_match_stats(stats:, team_champ_hash:)
