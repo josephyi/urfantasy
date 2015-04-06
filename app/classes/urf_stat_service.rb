@@ -1,7 +1,7 @@
 class UrfStatService
   CONNECTION = ActiveRecord::Base.connection
 
-  def self.delete_for(region: region, day: day, hour: hour)
+  def self.delete_for(region:, day:, hour:)
     UrfDayStat.where('region = ? AND urf_day = ? AND hour_in_day = ?', region, day, hour).delete_all
   end
 

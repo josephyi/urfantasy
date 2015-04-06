@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20150406020307) do
   end
 
   add_index "urf_matches", ["region", "match_id", "bucket_time"], name: "index_urf_matches_on_region_and_match_id_and_bucket_time", using: :btree
+  add_index "urf_matches", ["response"], name: "response_index", using: :gin
   add_index "urf_matches", ["response"], name: "urf_matches_gin_path_idx", using: :gin
 
 end
