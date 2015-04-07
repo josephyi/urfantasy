@@ -1,34 +1,6 @@
 class UrfStatAggregator
   CHAMPION_ID_KEY = 'championId'.freeze
 
-  def self.aggregate(region:, day:, hour:, matches:)
-    process_matches!(stats: init_stats(region: region, hour: hour, day: day), matches: matches)
-  end
-
-  def self.init_stats(region:, hour:, day:)
-    StaticData::CHAMPION_IDS.each_with_object({}) do |id, hash|
-      hash[id] = {
-          region: region,
-          hour_in_day: hour,
-          urf_day: day,
-          kills: 0,
-          deaths: 0,
-          assists: 0,
-          double_kills: 0,
-          triple_kills: 0,
-          quadra_kills: 0,
-          penta_kills: 0,
-          killing_spree_max: 0,
-          first_blood: 0,
-          minions_killed: 0,
-          bans: 0,
-          wins: 0,
-          losses: 0,
-          mirror_matches: 0
-      }
-    end
-  end
-
   # refactor lel
   def self.process_matches!(stats:, matches:)
     matches.each do |match|
@@ -43,6 +15,7 @@ class UrfStatAggregator
         merge_participant_stats!(stats: stats, participant: participant)
         hash[participant['teamId']] << participant[CHAMPION_ID_KEY]
       }
+
       merge_mirror_match_stats(stats: stats, team_champ_hash: hash)
     end
     stats

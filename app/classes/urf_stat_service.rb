@@ -1,13 +1,43 @@
 class UrfStatService
   CONNECTION = ActiveRecord::Base.connection
 
-  def self.delete_all(region:, day:, hour:)
-    UrfDayStat.where('region = ? AND urf_day = ? AND hour_in_day = ?', region, day, hour).delete_all
+  def self.aggregate(region:, day:, hour:, start_time:, end_time:)
+    delete_all(region: region, day: day, hour: hour)
+
+    stats = init_stats(region: region, hour: hour, day: day)
+    UrfMatch.where('region = ? AND bucket_time >= ? AND bucket_time < ?', region, start_time, end_time).find_in_batches(batch_size: 200) do |group|
+      UrfStatAggregator.process_matches!(stats: stats, matches: group)
+    end
+
+    insert_all(aggregate_stats: stats)
   end
 
-  # move to scope later
-  def self.matches(region:, start_time:, end_time:)
-    UrfMatch.where('region = ? AND bucket_time >= ? AND bucket_time < ?', region, start_time, end_time)
+  def self.init_stats(region:, hour:, day:)
+    StaticData::CHAMPION_IDS.each_with_object({}) do |id, hash|
+      hash[id] = {
+          region: region,
+          hour_in_day: hour,
+          urf_day: day,
+          kills: 0,
+          deaths: 0,
+          assists: 0,
+          double_kills: 0,
+          triple_kills: 0,
+          quadra_kills: 0,
+          penta_kills: 0,
+          killing_spree_max: 0,
+          first_blood: 0,
+          minions_killed: 0,
+          bans: 0,
+          wins: 0,
+          losses: 0,
+          mirror_matches: 0
+      }
+    end
+  end
+
+  def self.delete_all(region:, day:, hour:)
+    UrfDayStat.where('region = ? AND urf_day = ? AND hour_in_day = ?', region, day, hour).delete_all
   end
 
   #
