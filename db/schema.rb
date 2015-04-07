@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150406020307) do
+ActiveRecord::Schema.define(version: 20150407011620) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20150406020307) do
     t.datetime "updated_at",  null: false
   end
 
+  add_index "urf_matches", ["region", "bucket_time"], name: "urf_match_region_bucket_time_idx", order: {"bucket_time"=>:desc}, using: :btree
   add_index "urf_matches", ["region", "match_id", "bucket_time"], name: "index_urf_matches_on_region_and_match_id_and_bucket_time", using: :btree
   add_index "urf_matches", ["response"], name: "response_index", using: :gin
   add_index "urf_matches", ["response"], name: "urf_matches_gin_path_idx", using: :gin

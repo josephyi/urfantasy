@@ -15,13 +15,15 @@ class Bard
 
   CHAMPION_IDS = StaticData::CHAMPION_IDS
 
-  def perform(region, bucket_time)
+  def perform(bucket_time)
     day = DAY_OF_URF.(bucket_time)
     hour = HOUR_OF_URF.(bucket_time)
 
-    UrfStatService.delete_all(region: region, day: day, hour: hour)
-    matches = UrfStatService.matches(start_time: bucket_time, end_time: bucket_time + 86400)
-    stats = UrfStatAggregator.aggregate(region: region, day: day, hour: hour, matches: matches)
-    UrfStatService.insert_all(aggregate_stats: stats)
+    StaticData::REGIONS.each do |region|
+      UrfStatService.delete_all(region: region, day: day, hour: hour)
+      matches = UrfStatService.matches(region: region, start_time: bucket_time, end_time: bucket_time + 86400)
+      stats = UrfStatAggregator.aggregate(region: region, day: day, hour: hour, matches: matches)
+      UrfStatService.insert_all(aggregate_stats: stats)
+    end
   end
 end

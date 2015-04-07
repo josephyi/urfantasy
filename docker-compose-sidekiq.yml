@@ -26,7 +26,7 @@ redis:
     - redisData
 sidekiq:
   build: .
-  command: bundle exec sidekiq -q zilean -q nunu -q chogath
+  command: bundle exec sidekiq -c 5 -q bard #zilean -q nunu -q chogath
   volumes:
     - .:/app
   env_file: .env

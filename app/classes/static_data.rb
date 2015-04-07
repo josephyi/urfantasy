@@ -130,5 +130,6 @@ module StaticData
   # For realtime data, use:
   # Taric.client(region: 'na').static_champions(data_by_id: true)['data'].keys.map(&:to_i).sort
   CHAMPION_IDS = CHAMPIONS_ID_TO_NAME.keys.freeze
+  REGIONS = Taric::Client::REGION_ENDPOINT_STRING_KEYS.reject{|region| region == 'pbe'}.freeze
   freeze
 end

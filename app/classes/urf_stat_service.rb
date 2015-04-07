@@ -1,19 +1,19 @@
 class UrfStatService
   CONNECTION = ActiveRecord::Base.connection
 
-  def self.delete_for(region:, day:, hour:)
+  def self.delete_all(region:, day:, hour:)
     UrfDayStat.where('region = ? AND urf_day = ? AND hour_in_day = ?', region, day, hour).delete_all
   end
 
   # move to scope later
-  def self.matches(start_time:, end_time:)
-    UrfMatch.where('bucket_time >= ? AND bucket_time < ?', start_time, end_time)
+  def self.matches(region:, start_time:, end_time:)
+    UrfMatch.where('region = ? AND bucket_time >= ? AND bucket_time < ?', region, start_time, end_time)
   end
 
   #
   # @param [Hash] aggregate_stats
   def self.insert_all(aggregate_stats:)
-    CONNECTION.execute insert_all_query(aggregate_stats)
+    CONNECTION.execute insert_all_query(aggregate_stats: aggregate_stats)
   end
 
   def self.insert_all_query(aggregate_stats:)

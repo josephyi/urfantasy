@@ -9,8 +9,8 @@ class UrfStatAggregator
     StaticData::CHAMPION_IDS.each_with_object({}) do |id, hash|
       hash[id] = {
           region: region,
-          hour: hour,
-          day: day,
+          hour_in_day: hour,
+          urf_day: day,
           kills: 0,
           deaths: 0,
           assists: 0,

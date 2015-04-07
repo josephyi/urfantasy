@@ -21,6 +21,7 @@ namespace :urfantasy do
   AGGREGATOR_START_TIME = ENV.fetch('AGGREGATOR_START_TIME', 1427864400)
   # Stop Aggregating
   AGGREGATOR_END_TIME = ENV.fetch('AGGREGATOR_END_TIME', 1429340400)
+  AGGREGATOR_INTERVAL_SECONDS = 1.hour.to_i
 
   desc 'queue entire range'
   task queue_all: :environment do
