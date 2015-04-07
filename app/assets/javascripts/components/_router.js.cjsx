@@ -1,24 +1,20 @@
 class @Router extends Backbone.Router
   routes:
-    'scoreboard' : 'championLeaderboard'
+    '': 'root'
+    'scoreboard'          : 'championLeaderboard'
     'fantasy-leaderboard' : 'fantasyLeaderboard'
 
-  navigate: ->
+  navigate: (fragment, options) ->
     super
     console.log('hi')
+    PubSub.publish "navigate", target:fragment
 
-  championLeaderboard: (event) ->
-    event.preventDefault() if event
-    PubSub.publish "navigate", target:'/scoreboard'
-    PubSub.publish "main", content: @championLeaderboardElement()
 
-  fantasyLeaderboard: (event) ->
-    event.preventDefault() if event
-    PubSub.publish "navigate", target:'/fantasy-leaderboard'
-    PubSub.publish "main", content: @fantasyLeaderboardElement()
+  root: ->
+    PubSub.publish "main", content: <Home />
 
-  championLeaderboardElement: ->
-    return <Scoreboard />
+  championLeaderboard: ->
+    PubSub.publish "main", content: <Scoreboard />
 
-  fantasyLeaderboardElement: ->
-    return <FantasyLeaderboard />
+  fantasyLeaderboard: ->
+    PubSub.publish "main", content: <FantasyLeaderboard />

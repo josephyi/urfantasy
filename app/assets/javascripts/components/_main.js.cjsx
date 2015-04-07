@@ -1,11 +1,7 @@
 @Main = React.createClass
 
   getInitialState: ->
-    content: @homepage()
     animating: false
-
-  homepage: ->
-    return <Scoreboard />
 
   componentDidMount: ->
     @_subscribeToEvents()

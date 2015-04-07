@@ -3,6 +3,7 @@
     target: '/'
 
   componentDidMount: ->
+    console.log('menu')
     @_subscribeToEvents()
 
   componentWillUnmount: ->
@@ -10,6 +11,7 @@
 
   _subscribeToEvents: ->
     PubSub.subscribe 'navigate', (msg, data)=>
+      console.log(data)
       @setState data
 
   _unsubscribeFromEvents: ->
@@ -28,8 +30,6 @@
 
   fantasyLeaderboardElement: ->
     return <FantasyLeaderboard />
-
-  fantasyLeaderboardClass: ->
 
 
   render: ->

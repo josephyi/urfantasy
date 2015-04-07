@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 20150407011620) do
 
   add_index "urf_matches", ["region", "bucket_time"], name: "urf_match_region_bucket_time_idx", order: {"bucket_time"=>:desc}, using: :btree
   add_index "urf_matches", ["region", "match_id", "bucket_time"], name: "index_urf_matches_on_region_and_match_id_and_bucket_time", using: :btree
+  add_index "urf_matches", ["response"], name: "index_urf_matches_on_response", using: :gin
   add_index "urf_matches", ["response"], name: "urf_matches_gin_path_idx", using: :gin
 
 end

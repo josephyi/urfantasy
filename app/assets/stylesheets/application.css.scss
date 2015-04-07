@@ -49,11 +49,11 @@ body {
     content: '';
     top: 50%;
     left: 50%;
-    margin: -.64285em 0 0 -.64285em;
-    width: 1.2857em;
-    height: 1.2857em;
+    margin: -2.5rem 0 0 -2.5rem;
+    width: 5rem;
+    height: 5rem;
     border-radius: 500rem;
-    border: .2em solid rgba(0, 0, 0, 0.15);
+    border: .5rem solid rgba(0, 0, 0, 0.15);
   }
 
   &:after {
@@ -61,9 +61,9 @@ body {
     content: '';
     top: 50%;
     left: 50%;
-    margin: -.64285em 0 0 -.64285em;
-    width: 1.2857em;
-    height: 1.2857em;
+    margin: -2.5rem 0 0 -2.5rem;
+    width: 5rem;
+    height: 5rem;
     -webkit-animation: button-spin .6s linear;
     animation: button-spin .6s linear;
     -webkit-animation-iteration-count: infinite;
@@ -71,7 +71,7 @@ body {
     border-radius: 500rem;
     border-color: #FFF rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
     border-style: solid;
-    border-width: .2em;
+    border-width: .5em;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0);
   }
 }
