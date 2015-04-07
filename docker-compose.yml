@@ -1,3 +1,14 @@
+redisData:
+  image: redis
+  volumes:
+    - /data
+  command: echo
+redis:
+  image: redis
+  ports:
+    - "6379"
+  volumes_from:
+    - redisData
 memcached:
   image: memcached
   ports:
@@ -22,5 +33,6 @@ app:
   ports:
     - "3000:3000"
   links:
+    - redis
     - postgres
     - memcached
