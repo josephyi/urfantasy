@@ -11,13 +11,14 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery_ujs
-//= require turbolinks
-//= require vendor/low_dash
+//= require vendor/underscore
 //= require vendor/pubsub
-//= require helpers/animation
-//= require helpers/css
+//= require vendor/backbone
 //= require react
 //= require react_ujs
 //= require semantic-ui
-//= require_tree .
+//= require helpers/animation
+//= require helpers/css
+//= require_tree ./components
+//= require app
+

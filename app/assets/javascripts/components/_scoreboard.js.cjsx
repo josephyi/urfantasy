@@ -18,9 +18,8 @@
 
 
   render: ->
-    champions = <div></div>
     if @state.match?.leaderboard?
-      champions = @state.match.leaderboard.map( (champion) =>
+      content = @state.match.leaderboard.map( (champion) =>
         return <Card
           img={"http://ddragon.leagueoflegends.com/cdn/5.2.1/img/champion/#{champion.key}.png"}
           title={champion.name}
@@ -28,10 +27,12 @@
           key={champion.id}
           description={champion.stats.minionsKilled} />
       )
+    else
+      content = <LoadingIndicator />
 
     return (
       <div className="ui cards">
-        { champions }
+        { content }
       </div>
     )
 

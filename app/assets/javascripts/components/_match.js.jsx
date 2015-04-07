@@ -1,7 +1,7 @@
 var Match = React.createClass({
   getInitialState: function () {
     console.log(this.props);
-    return _.assign(this.props, {revealed:false});
+    return _.extend(this.props, {revealed:false});
   },
 
   refresh: function(event) {
@@ -21,7 +21,7 @@ var Match = React.createClass({
     event.preventDefault();
 
     this.setState(function(previousState, currentProps) {
-      teams = _.sortByOrder(this.state.match.teams,'total_score', false)
+      teams = _.sortBy(this.state.match.teams,'total_score', false)
       _.forEach(teams, function(team) {
         team.champions = _.sortByOrder(team.champions,'total_score', false);
       });

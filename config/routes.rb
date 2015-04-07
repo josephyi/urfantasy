@@ -4,10 +4,10 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'application#index'
 
   get 'test' => 'test#index'
-  get 'scoreboard' => 'scoreboard#index'
+  # get 'scoreboard' => 'scoreboard#index'
 
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
@@ -56,4 +56,5 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
   mount Sidekiq::Web => '/sidekiq'
+  get '*path' => 'application#index'
 end

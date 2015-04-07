@@ -1,12 +1,27 @@
 @Menu = React.createClass
+  getInitialState: ->
+    target: '/'
+
+  componentDidMount: ->
+    @_subscribeToEvents()
+
+  componentWillUnmount: ->
+    @_unsubscribeFromEvents()
+
+  _subscribeToEvents: ->
+    PubSub.subscribe 'navigate', (msg, data)=>
+      @setState data
+
+  _unsubscribeFromEvents: ->
+    PubSub.unsubscribe 'navigate'
 
   championLeaderboard: (event) ->
-    event.preventDefault()
-    PubSub.publish "main", content: @championLeaderboardElement()
+    event.preventDefault() if event
+    App.router.navigate('/scoreboard', true)
 
   fantasyLeaderboard: (event) ->
-    event.preventDefault()
-    PubSub.publish "main", content: @fantasyLeaderboardElement()
+    event.preventDefault() if event
+    App.router.navigate('/fantasy-leaderboard', true)
 
   championLeaderboardElement: ->
     return <Scoreboard />
@@ -14,14 +29,24 @@
   fantasyLeaderboardElement: ->
     return <FantasyLeaderboard />
 
+  fantasyLeaderboardClass: ->
+
 
   render: ->
+    fantasyClass = React.addons.classSet
+      'item': true
+      'active': @state.target is '/fantasy-leaderboard'
+
+    championClass = React.addons.classSet
+      'item': true
+      'active': @state.target is '/scoreboard'
+
     return (
       <div className="ui vertical menu">
-        <a className="item" onClick={@fantasyLeaderboard}>
+        <a className={fantasyClass} onClick={@fantasyLeaderboard}>
           Fantasy Leaderboard
         </a>
-        <a className="item" onClick={@championLeaderboard}>
+        <a className={championClass} onClick={@championLeaderboard}>
           Champion Leaderboard
         </a>
         <a className="item">
