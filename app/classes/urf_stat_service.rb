@@ -1,7 +1,7 @@
 class UrfStatService
   CONNECTION = ActiveRecord::Base.connection
 
-  def self.aggregate(region:, day:, hour:, start_time:, end_time:)
+  def self.aggregate_hour(region:, day:, hour:, start_time:, end_time:)
     delete_all(region: region, day: day, hour: hour)
 
     stats = init_stats(region: region, hour: hour, day: day)

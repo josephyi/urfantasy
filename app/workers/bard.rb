@@ -20,7 +20,7 @@ class Bard
     hour = HOUR_OF_URF.(bucket_time)
 
     StaticData::REGIONS.each do |region|
-      UrfStatService.aggregate(region: region, day: day, hour: hour, start_time: bucket_time, end_time: bucket_time + 86400)
+      UrfStatService.aggregate_hour(region: region, day: day, hour: hour, start_time: bucket_time, end_time: bucket_time + 3600)
     end
   end
 end
