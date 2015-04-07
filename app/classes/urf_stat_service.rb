@@ -1,6 +1,4 @@
 class UrfStatService
-  CONNECTION = ActiveRecord::Base.connection
-
   def self.aggregate_hour(region:, day:, hour:, start_time:, end_time:)
     delete_all(region: region, day: day, hour: hour)
 
@@ -43,7 +41,7 @@ class UrfStatService
   #
   # @param [Hash] aggregate_stats
   def self.insert_all(aggregate_stats:)
-    CONNECTION.execute insert_all_query(aggregate_stats: aggregate_stats)
+    ActiveRecord::Base.connection.execute insert_all_query(aggregate_stats: aggregate_stats)
   end
 
   def self.insert_all_query(aggregate_stats:)
