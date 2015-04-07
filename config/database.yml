@@ -3,7 +3,7 @@ default: &default
   encoding: utf-8
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
-  pool: 25
+  pool: 35
   username: postgres
   password:
   host: <%= ENV.fetch('POSTGRES_HOST', 'postgres') %>
@@ -18,4 +18,4 @@ test:
 
 production:
   <<: *default
-  database: urfantasy_test
+  database: <%= ENV.fetch('POSTGRES_DB_PROD', 'urfantasy_dev') %>
