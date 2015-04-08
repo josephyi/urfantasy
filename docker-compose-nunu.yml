@@ -1,6 +1,6 @@
 nunu:
   build: .
-  command: bundle exec sidekiq -c 10 -q nunu
+  command: bundle exec sidekiq -c 1 -q nunu
   volumes:
     - .:/app
   env_file: .env

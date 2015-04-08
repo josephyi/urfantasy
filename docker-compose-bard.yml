@@ -1,6 +1,6 @@
 bard:
   build: .
-  command: bundle exec sidekiq -c 5 -q bard
+  command: bundle exec sidekiq -c 1 -q bard
   volumes:
     - .:/app
   env_file: .env

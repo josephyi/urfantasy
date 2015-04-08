@@ -1,6 +1,6 @@
 chogath:
   build: .
-  command: bundle exec sidekiq -c 10 -q chogath
+  command: bundle exec sidekiq -c 5 -q chogath
   volumes:
     - .:/app
   env_file: .env

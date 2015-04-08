@@ -1,6 +1,6 @@
 zilean:
   build: .
-  command: bundle exec sidekiq -c 10 -q zilean
+  command: bundle exec sidekiq -c 1 -q zilean
   volumes:
     - .:/app
   env_file: .env
