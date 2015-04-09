@@ -9,7 +9,7 @@ class Nunu
     result = UrfIdsRequest.where(region: region, bucket_time: bucket_time).first
     UrfIdsRequest.create!(region: region, response: match_ids, bucket_time: bucket_time) if result.nil?
 
-    match_ids.each {|match_id| Chogath.perform_async(region, bucket_time, match_id)}
+    Chogath.feast(region: region, bucket_time: bucket_time, match_ids: match_ids)
   rescue Taric::FaradayMiddleware::NotFound => e
     puts "No record found for #{region} at #{bucket_time} - #{e}"
   end

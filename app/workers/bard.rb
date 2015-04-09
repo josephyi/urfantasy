@@ -1,4 +1,3 @@
-
 class Bard
   include Sidekiq::Worker
   sidekiq_options queue: :bard

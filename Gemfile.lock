@@ -82,6 +82,8 @@ GEM
     dalli (2.7.4)
     debug_inspector (0.0.2)
     erubis (2.7.0)
+    ethon (0.7.3)
+      ffi (>= 1.3.0)
     execjs (2.4.0)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
@@ -91,6 +93,7 @@ GEM
       faraday (~> 0.9.0)
       faraday_middleware (~> 0.9.1)
       oj (~> 2.0)
+    ffi (1.9.8)
     globalid (0.3.3)
       activesupport (>= 4.1.0)
     hike (1.2.3)
@@ -193,7 +196,7 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
-    taric (0.1.14)
+    taric (0.2.0)
       addressable (~> 2.3)
       faraday_middleware (~> 0.9)
       faraday_middleware-parse_oj (~> 0.3.0)
@@ -206,6 +209,8 @@ GEM
       hitimes
     turbolinks (2.5.3)
       coffee-rails
+    typhoeus (0.7.1)
+      ethon (>= 0.7.1)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.7.1)
@@ -239,7 +244,8 @@ DEPENDENCIES
   sinatra
   spring
   sprockets-coffee-react
-  taric (~> 0.1.14)
+  taric (~> 0.2)
   turbolinks
+  typhoeus (~> 0.7)
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
