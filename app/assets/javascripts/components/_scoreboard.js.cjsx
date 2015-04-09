@@ -21,7 +21,7 @@
     if @state.leaderboard?
       content = @state.leaderboard.map( (champion) =>
         return <Card
-          img={"http://ddragon.leagueoflegends.com/cdn/5.2.1/img/champion/#{champion.name}.png"}
+          img={"http://ddragon.leagueoflegends.com/cdn/5.7.2/img/champion/#{champion.key}.png"}
           title={champion.name}
           meta={champion.average_score}
           description={champion.average_kills} />
