@@ -21,6 +21,7 @@ class UrfDayStat < ActiveRecord::Base
 
   def to_hash
     {
+        key: key,
       name: name,
       id: champion_id,
       matches: matches,
@@ -60,6 +61,10 @@ class UrfDayStat < ActiveRecord::Base
 
   def name
     StaticData::CHAMPIONS_ID_TO_NAME[champion_id][:name]
+  end
+
+  def key
+    StaticData::CHAMPIONS_ID_TO_NAME[champion_id][:key]
   end
 
   def matches
