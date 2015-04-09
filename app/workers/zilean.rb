@@ -6,6 +6,6 @@ class Zilean
   sidekiq_options queue: :zilean
 
   def perform(bucket_time)
-    StaticData::REGIONS.each do |region| Nunu.perform_async(region, bucket_time) end
+    StaticData::REGIONS.each do |region| Nunu.consume(region: region, bucket_time: bucket_time) end
   end
 end

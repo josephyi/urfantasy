@@ -1,9 +1,0 @@
-nunu:
-  build: .
-  command: bundle exec sidekiq -c 1 -q nunu
-  volumes:
-    - .:/app
-  env_file: .env
-  external_links:
-    - urfantasy_postgres_1:postgres
-    - urfantasy_redis_1:redis
