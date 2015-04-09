@@ -59,7 +59,7 @@ class UrfDayStat < ActiveRecord::Base
   end
 
   def name
-    StaticData::CHAMPIONS_ID_TO_NAME[champion_id]
+    StaticData::CHAMPIONS_ID_TO_NAME[champion_id][:name]
   end
 
   def matches
