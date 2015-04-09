@@ -12,8 +12,8 @@
   _subscribeToEvents: ->
     # When the reset button is clicked...
     PubSub.subscribe 'main', (msg, data)=>
-      @setState _.extend(data, {animating: true})
-      setTimeout(@animationEnded, 1000) # hack because we cant get animationend events
+      console.log(data)
+      @setState data
 
   _unsubscribeFromEvents: ->
     PubSub.unsubscribe 'main'

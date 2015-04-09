@@ -1,6 +1,7 @@
 @LoadingIndicator = React.createClass
   render: ->
     (
-      <div className="ui loading">
+      <div class="ui active dimmer">
+        <div class="ui large text loader">Loading</div>
       </div>
     )

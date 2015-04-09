@@ -4,6 +4,7 @@ class @Router extends Backbone.Router
     'scoreboard'          : 'championLeaderboard'
     'scoreboard/top/:day' : 'championLeaderboard'
     'fantasy-leaderboard' : 'fantasyLeaderboard'
+    'champions/:champion_id' : 'champion'
 
   initialize: ->
     # The initial pageload doesn't fire the navigate event, just the route's method
@@ -20,8 +21,12 @@ class @Router extends Backbone.Router
 
   championLeaderboard: (day) ->
     day ?= 1
-    console.log(day)
     PubSub.publish "main", content: <Scoreboard day={day} />
 
   fantasyLeaderboard: ->
     PubSub.publish "main", content: <FantasyLeaderboard />
+
+  champion: (champion_id) ->
+    # Clears out the content or else it wont get updated
+    PubSub.publish "main", content:''
+    PubSub.publish "main", content: <ChampionDetail champion_id={champion_id} />

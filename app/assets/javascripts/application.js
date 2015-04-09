@@ -19,6 +19,7 @@
 //= require semantic-ui
 //= require helpers/animation
 //= require helpers/css
+//= require helpers/champions
 //= require_tree ./components
 //= require app
 

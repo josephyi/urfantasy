@@ -21,10 +21,12 @@ class UrfDayStat < ActiveRecord::Base
 
   def to_hash
     {
-        key: key,
+      key: key,
       name: name,
       id: champion_id,
       matches: matches,
+      wins: wins,
+      losses: losses,
       score: score,
       average_score: average_score,
       kills: kills,
@@ -42,8 +44,26 @@ class UrfDayStat < ActiveRecord::Base
     }
   end
 
-  def self.day_aggregate(args)
-    self.select(AGGREGATE_SQL).where(urf_day: args[:urf_day],champion_id:args[:champion_id]).group(:champion_id).take
+  def day_hash
+    {
+      day: urf_day,
+      hour: hour_in_day
+    }
+  end
+
+  def self.aggregate(args)
+    self.select(AGGREGATE_SQL)
+        .where(args)
+        .group(:champion_id).take
+        .to_hash
+  end
+
+  def self.aggregate_historical(args)
+    self.select('urf_day, hour_in_day,'+AGGREGATE_SQL)
+        .where(args)
+        .group(:urf_day).group(:champion_id).group(:hour_in_day)
+        .to_a.sort{|a,b| a.hour_in_day <=> b.hour_in_day}.sort{|a,b| a.urf_day <=> b.urf_day}
+        .map{|champ|champ.to_hash.merge(champ.day_hash)}
   end
 
   def self.day_aggregate_all(args)
@@ -51,7 +71,6 @@ class UrfDayStat < ActiveRecord::Base
   end
 
   def self.day_leaderboard(args)
-    puts args
     self.select(AGGREGATE_SQL)
         .where(urf_day: args[:urf_day])
         .group(:champion_id)
@@ -115,7 +134,7 @@ class UrfDayStat < ActiveRecord::Base
     # Get average stats with average_[stat]
     if symbol_str.start_with?('average_')
       return 0 if self.matches == 0
-      return self.send(symbol_str.gsub('average_','')) / self.matches
+      return (self.send(symbol_str.gsub('average_','')) / self.matches).round(2)
     else
       super
     end
