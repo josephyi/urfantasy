@@ -3,7 +3,6 @@
     target: '/'
 
   componentDidMount: ->
-    console.log('menu')
     @_subscribeToEvents()
 
   componentWillUnmount: ->
@@ -11,7 +10,6 @@
 
   _subscribeToEvents: ->
     PubSub.subscribe 'navigate', (msg, data)=>
-      console.log(data)
       @setState data
 
   _unsubscribeFromEvents: ->
@@ -19,17 +17,11 @@
 
   championLeaderboard: (event) ->
     event.preventDefault() if event
-    App.router.navigate('/scoreboard', true)
+    App.router.navigate('/scoreboard/top/3', true)
 
   fantasyLeaderboard: (event) ->
     event.preventDefault() if event
     App.router.navigate('/fantasy-leaderboard', true)
-
-  championLeaderboardElement: ->
-    return <Scoreboard />
-
-  fantasyLeaderboardElement: ->
-    return <FantasyLeaderboard />
 
 
   render: ->

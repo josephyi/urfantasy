@@ -13,4 +13,14 @@ class ScoreboardController < ApplicationController
     end
   end
 
+  def top
+    puts params[:day]
+    presenter = {
+      leaderboard: UrfDayStat.day_leaderboard(urf_day:params[:day])
+    }
+    if request.xhr?
+      render :json => presenter
+    end
+  end
+
 end

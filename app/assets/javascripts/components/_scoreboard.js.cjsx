@@ -1,16 +1,16 @@
 @Scoreboard = React.createClass
   getInitialState: ->
-    if _.isEmpty @props
-      @refresh()
-    else
+    if @props and @props.leaderboard
       return @props
+    else
+      @refresh()
 
 
   refresh: (event) ->
     event.preventDefault() if event
 
     $.ajax
-      url: "/test",
+      url: "/scoreboard/top/#{@props.day}",
       type: "GET",
       dataType: "json",
       success: (data) =>
@@ -18,14 +18,13 @@
 
 
   render: ->
-    if @state.match?.leaderboard?
-      content = @state.match.leaderboard.map( (champion) =>
+    if @state.leaderboard?
+      content = @state.leaderboard.map( (champion) =>
         return <Card
-          img={"http://ddragon.leagueoflegends.com/cdn/5.2.1/img/champion/#{champion.key}.png"}
+          img={"http://ddragon.leagueoflegends.com/cdn/5.2.1/img/champion/#{champion.name}.png"}
           title={champion.name}
-          meta={champion.total_score}
-          key={champion.id}
-          description={champion.stats.minionsKilled} />
+          meta={champion.average_score}
+          description={champion.average_kills} />
       )
     else
       content = <LoadingIndicator />
