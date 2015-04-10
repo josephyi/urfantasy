@@ -3,11 +3,13 @@ class UrfStatService
     delete_all(region: region, day: day, hour: hour)
 
     stats = init_stats(region: region, hour: hour, day: day)
-    UrfMatch.where('region = ? AND bucket_time >= ? AND bucket_time < ?', region, start_time, end_time).find_in_batches(batch_size: 200) do |group|
+    UrfMatch.in_region_and_between(region, start_time, end_time).find_in_batches(batch_size: 200) do |group|
       UrfStatAggregator.process_matches!(stats: stats, matches: group)
     end
-
     insert_all(aggregate_stats: stats)
+
+    match_count = UrfMatch.in_region_and_between(region, start_time, end_time).count
+    UrfDayStatLog.find_or_initialize_by(region: region, urf_day: day, hour_in_day: hour).update(matches: match_count)
   end
 
   def self.init_stats(region:, hour:, day:)

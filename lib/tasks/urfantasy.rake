@@ -25,6 +25,10 @@ namespace :urfantasy do
 
   desc 'queue entire range'
   task queue_all: :environment do
+    r = Sidekiq::ScheduledSet.new
+    jobs = r.select {|retri| retri.klass == 'Zilean' }
+    jobs.each(&:delete)
+
     (START_TIME..END_TIME).step(INTERVAL_SECONDS) do |bucket_time|
       Zilean.perform_at(bucket_time + OFFSET, bucket_time)
     end
@@ -32,6 +36,10 @@ namespace :urfantasy do
 
   desc 'queue aggregator'
   task aggregate: :environment do
+    r = Sidekiq::ScheduledSet.new
+    jobs = r.select {|retri| retri.klass == 'Bard' }
+    jobs.each(&:delete)
+
     (AGGREGATOR_START_TIME..AGGREGATOR_END_TIME).step(AGGREGATOR_INTERVAL_SECONDS) do |bucket_time|
       Bard.perform_at(bucket_time + AGGREGATOR_OFFSET, bucket_time)
     end

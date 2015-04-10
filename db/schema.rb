@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150407011620) do
+ActiveRecord::Schema.define(version: 20150410184605) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "urf_day_stat_logs", force: :cascade do |t|
+    t.string   "region"
+    t.integer  "urf_day"
+    t.integer  "hour_in_day"
+    t.integer  "matches"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "urf_day_stats", force: :cascade do |t|
     t.integer "champion_id"
@@ -38,6 +47,7 @@ ActiveRecord::Schema.define(version: 20150407011620) do
   end
 
   add_index "urf_day_stats", ["champion_id", "urf_day", "hour_in_day", "region"], name: "urf_day_stats_idx", using: :btree
+  add_index "urf_day_stats", ["urf_day", "hour_in_day", "region"], name: "urf_day_stat_log_idx", using: :btree
 
   create_table "urf_ids_requests", force: :cascade do |t|
     t.string   "region"
