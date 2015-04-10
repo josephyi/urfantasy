@@ -25,6 +25,7 @@ namespace :urfantasy do
 
   desc 'queue entire range'
   task queue_all: :environment do
+    Sidekiq::Queue.new('zilean').each do |job| job.delete end
     r = Sidekiq::ScheduledSet.new
     jobs = r.select {|retri| retri.klass == 'Zilean' }
     jobs.each(&:delete)
@@ -36,6 +37,7 @@ namespace :urfantasy do
 
   desc 'queue aggregator'
   task aggregate: :environment do
+    Sidekiq::Queue.new('bard').each do |job| job.delete end
     r = Sidekiq::ScheduledSet.new
     jobs = r.select {|retri| retri.klass == 'Bard' }
     jobs.each(&:delete)
