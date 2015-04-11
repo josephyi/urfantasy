@@ -1,0 +1,26 @@
+{
+  "name": "URFantasy",
+  "version": "0.0.0",
+  "description": "Entry for the 2015 League of Legends API Challenge",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/josephyi/urfantasy.git"
+  },
+  "author": "josephyi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/josephyi/urfantasy/issues"
+  },
+  "dependencies" : {
+    "webpack": "^1.7.3"
+  },
+  "devDependencies" : {
+    "css-loader": "^0.9.1",
+    "file-loader": "^0.8.1",
+    "sass-loader": "^0.6.0",
+    "url-loader": "^0.5.5"
+  }
+}
