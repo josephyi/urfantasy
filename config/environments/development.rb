@@ -41,4 +41,10 @@ Rails.application.configure do
   config.cache_store = :dalli_store
 
   config.web_console.whitelisted_ips='172.17.0.0/16'
+
+  config.action_controller.asset_host = Proc.new { |source|
+    if source =~ /wp_bundle\.js$/i
+      ENV.fetch('WEBPACK_DEV_SERVER', 'http://webpackdevserver:2998')
+    end
+  }
 end

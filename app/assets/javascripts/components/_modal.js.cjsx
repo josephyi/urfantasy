@@ -11,7 +11,6 @@
     React.findDOMNode(@).addEventListener(TransitionEvent(), @animationEnded())
 
   animationEnded: ->
-    console.log('animation ended!')
     @setState animating: false
 
   componentWillUnmount: ->

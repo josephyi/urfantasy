@@ -24,6 +24,13 @@ postgres:
     - "5432"
   volumes_from:
     - postgresData
+webpackdevserver:
+  build: .
+  command: webpack-dev-server --config webpack.hot.config.js --hot --progress --inline --port 2998
+  volumes:
+      - .:/app
+  ports:
+    - "2998:2998"
 app:
   build: .
   command: bundle exec rails s -p 3000 -b '0.0.0.0'
@@ -36,3 +43,4 @@ app:
     - redis
     - postgres
     - memcached
+    - webpackdevserver

@@ -1,7 +1,7 @@
 FROM ruby:2.2.1
 
-RUN apt-get update -qq && apt-get install -y build-essential nodejs npm nodejs-legacy vim libpq-dev cron
-RUN npm install -g phantomjs
+RUN apt-get update -qq && apt-get install -y build-essential nodejs nodejs-legacy npm libpq-dev
+RUN npm install webpack webpack-dev-server -g
 
 RUN mkdir /app
 

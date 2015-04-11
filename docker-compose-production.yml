@@ -1,3 +1,7 @@
+nginx:
+  image: dockerfile/nginx
+  volumes:
+    - 
 redisData:
   image: redis
   volumes:
