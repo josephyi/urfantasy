@@ -7,5 +7,5 @@
 /spec/reports/
 /tmp/
 /log/
-/client/node_modules
+/node_modules/
 .env

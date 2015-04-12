@@ -10,5 +10,9 @@ COPY Gemfile Gemfile
 COPY Gemfile.lock Gemfile.lock
 RUN bundle install
 
+COPY package.json package.json
+RUN npm install --unsafe-perm
+
 ADD . /app
 WORKDIR /app
+
