@@ -1,6 +1,5 @@
 class StatController < ApplicationController
   respond_to :json
-
   before_filter :prepare_params
 
   def prepare_params
@@ -8,7 +7,7 @@ class StatController < ApplicationController
   end
 
   def urf
-    respond_with UrfDayStat.aggregate(query)
+    respond_with UrfDayStat.aggregate(@query)
   end
 
 end
