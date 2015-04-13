@@ -10,10 +10,9 @@
     event.preventDefault() if event
 
     $.ajax
-      url: "http://104.236.170.77:3000/stat/urf?day=#{@props.day}",
+      url: "/scoreboard/top/#{@props.day}",
       type: "GET",
       dataType: "json",
-      crossDomain: true,
       success: (data) =>
         @setState(data)
 
