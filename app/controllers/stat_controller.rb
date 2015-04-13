@@ -7,7 +7,7 @@ class StatController < ApplicationController
   end
 
   def urf
-    respond_with UrfDayStat.aggregate(@query)
+    respond_with UrfDayStat.aggregate_all(@query)
   end
 
 end

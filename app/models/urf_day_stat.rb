@@ -51,11 +51,16 @@ class UrfDayStat < ActiveRecord::Base
     }
   end
 
-  def self.aggregate(args)
-    self.select(AGGREGATE_SQL)
-        .where(args)
-        .group(:champion_id).take
-        .to_hash
+  def self.aggregate_relation(args)
+    select(AGGREGATE_SQL).where(args).group(:champion_id)
+  end
+
+  def self.aggregate_single(args)
+    aggregate_relation(args).take.to_hash
+  end
+
+  def self.aggregate_all(args)
+    aggregate_relation(args).all.to_a.map{|champ| champ.to_hash}
   end
 
   def self.aggregate_historical(args)
@@ -71,10 +76,8 @@ class UrfDayStat < ActiveRecord::Base
   end
 
   def self.day_leaderboard(args)
-    self.select(AGGREGATE_SQL)
-        .where(urf_day: args[:urf_day])
-        .group(:champion_id)
-        .to_a.sort{ |a,b| b.average_score <=> a.average_score }
+    aggregate_relation(args)
+        .to_a.sort_by{ |a| a.average_score }.reverse!
         .map{|champ| champ.to_hash}
   end
 
