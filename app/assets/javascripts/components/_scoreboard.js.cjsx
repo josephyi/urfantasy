@@ -10,7 +10,7 @@
     event.preventDefault() if event
 
     $.ajax
-      url: "/scoreboard/top/#{@props.day}",
+      url: "http://104.236.170.77/stat/urf?day=#{@props.day}",
       type: "GET",
       dataType: "json",
       success: (data) =>

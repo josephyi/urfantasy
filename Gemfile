@@ -30,9 +30,11 @@ gem 'typhoeus', '~> 0.7'
 gem 'taric', '~> 0.2'
 gem 'sinatra'
 gem 'dalli', '~> 2.7'
-gem 'react-rails', '~> 1.0.0.pre', github: 'reactjs/react-rails'
+gem 'react-rails', '~> 1.0'
 gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass', branch: 'v1.0beta'
 gem 'sprockets-coffee-react'
+gem 'responders', '~> 2.1'
+gem 'rack-cors', :require => 'rack/cors'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

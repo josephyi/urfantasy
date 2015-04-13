@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'test' => 'test#index'
   get 'scoreboard/top/:day' => 'scoreboard#top'
   get 'champions/:champion_id' => 'champions#show'
+  get 'stat/urf' => 'stat#urf'
 
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
