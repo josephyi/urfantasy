@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 
   # intercept all non ajax requests
   def render_default_view
-    return if request.xhr?
+    return if request.xhr? || params[:format]
     respond_to do |format|
       format.html { render 'application/index', layout: 'application' }
     end
