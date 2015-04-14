@@ -3,7 +3,7 @@ class StatController < ApplicationController
   before_filter :prepare_params
 
   def prepare_params
-    @query ||= {region: params[:region], urf_day: params[:day], hour_in_day: params[:hour]}.compact
+    @query ||= {region: params[:region], urf_day: params[:day], hour_in_day: params[:hour], champion_id: params[:champion_id]}.compact
   end
 
   def urf
