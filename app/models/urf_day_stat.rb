@@ -12,6 +12,7 @@ class UrfDayStat < ActiveRecord::Base
   AGGREGATE_SQL = 'champion_id,
       sum(kills) AS kills,
       sum(deaths) as deaths,
+      sum(assists) as assists,
       sum(triple_kills) as triple_kills,
       sum(quadra_kills) as quadra_kills,
       sum(penta_kills) as penta_kills,
@@ -33,6 +34,8 @@ class UrfDayStat < ActiveRecord::Base
       average_kills: average_kills,
       deaths: deaths,
       average_deaths: average_deaths,
+      assists: assists,
+      average_assists: average_assists,
       triple_kills: triple_kills,
       average_triple_kills: average_triple_kills,
       quadra_kills: quadra_kills,
@@ -96,6 +99,7 @@ class UrfDayStat < ActiveRecord::Base
   def score
     kill_score +
     death_score +
+    assist_score +
     triple_kill_score +
     quadra_kill_score +
     penta_kill_score +
@@ -108,6 +112,10 @@ class UrfDayStat < ActiveRecord::Base
 
   def death_score
     deaths * POINTS_PER_DEATH
+  end
+
+  def assist_score
+    assists * POINTS_PER_ASSIST
   end
 
   def triple_kill_score
