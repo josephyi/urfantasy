@@ -18,7 +18,11 @@ class UrfDayStat < ActiveRecord::Base
       sum(penta_kills) as penta_kills,
       sum(minions_killed) as minions_killed,
       sum(wins) as wins,
-      sum(losses) as losses'
+      sum(losses) as losses,
+      sum(bans) as bans'
+
+  # production match count
+  TOTAL_MATCHES = 491322
 
   def to_hash
     {
@@ -39,11 +43,13 @@ class UrfDayStat < ActiveRecord::Base
       triple_kills: triple_kills,
       average_triple_kills: average_triple_kills,
       quadra_kills: quadra_kills,
-      average_quadra_kills: average_quadra_kills,
+      average_quadra_kills:  average_quadra_kills,
       penta_kills: penta_kills,
       average_penta_kills: average_penta_kills,
       minions_killed: minions_killed,
-      average_minions_killed: average_minions_killed
+      average_minions_killed: average_minions_killed,
+      kda: kda.round(2),
+      bans: bans
     }
   end
 
@@ -63,7 +69,8 @@ class UrfDayStat < ActiveRecord::Base
   end
 
   def self.aggregate_all(args)
-    aggregate_relation(args).all.to_a.map{|champ| champ.to_hash}
+    match_count = UrfMatch.where({region: args[:region]}.compact).count
+    aggregate_relation(args).all.to_a.map{|champ| champ.to_hash.merge!(match_count: match_count)}
   end
 
   def self.aggregate_historical(args)
@@ -116,6 +123,10 @@ class UrfDayStat < ActiveRecord::Base
 
   def assist_score
     assists * POINTS_PER_ASSIST
+  end
+
+  def kda
+    (kills + assists).to_f / deaths
   end
 
   def triple_kill_score

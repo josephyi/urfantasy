@@ -44,11 +44,14 @@
       <div className={sidebarClass}>
         <i className="close icon" onClick={@_closeSidebar}></i>
         <h1>{@state.name}</h1>
-        <img src={"http://ddragon.leagueoflegends.com/cdn/5.7.2/img/champion/#{@state.name}.png"} />
+        <img src={"http://ddragon.leagueoflegends.com/cdn/5.7.2/img/champion/#{@state.key}.png"} />
         <Statistic label="Average Score" value={@state.average_score} />
         <Statistic label="Average Kills" value={@state.average_kills} />
         <Statistic label="Average Deaths" value={@state.average_deaths} />
+        <Statistic label="Average Assists" value={@state.average_assists} />
+        <Statistic label="KDA" value={@state.kda} />
         <Statistic label="Wins" value={@state.wins} />
         <Statistic label="Losses" value={@state.losses} />
+        <Statistic label="Ban Rate" value={(100 * @state.bans / @state.match_count).toFixed(2) + '%'} />
       </div>
     )
