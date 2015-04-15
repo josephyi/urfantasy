@@ -21,7 +21,7 @@
   render: ->
     content = if @state.content then @state.content else <LoadingIndicator />
     return (
-      <div className="main">
+      <div className="app-main">
         {content}
       </div>
     )

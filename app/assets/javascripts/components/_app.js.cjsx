@@ -7,15 +7,7 @@
 
 
   render: ->
-    <div>
+    <div className="app">
       <Header/>
-      <div className="ui grid">
-        <div className="four wide column">
-          <Menu/>
-        </div>
-        <div className="twelve wide column">
-          <Main/>
-        </div>
-      </div>
-      <Modal/>
+      <Main/>
     </div>

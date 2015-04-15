@@ -2,15 +2,12 @@
 
   render: ->
     return (
-      <div>
-        <div className="ui secondary pointing menu app-header">
-          <div className="left menu">
-            <h3>URFantasy Pickem</h3>
-          </div>
-
-          <div className="right menu">
-            <LoginButton {...this.props} />
-          </div>
+      <div className="ui secondary menu app-header">
+        <div className="left menu">
+          <h3>For What It's Urf</h3>
+        </div>
+        <div className="ui right vertical menu app-header-search">
+          <Menu />
         </div>
       </div>
     )

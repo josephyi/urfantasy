@@ -9,7 +9,7 @@
       )
 
     return (
-      <div class="ui selection list">
+      <div className="ui selection list">
         {list}
       </div>
     )

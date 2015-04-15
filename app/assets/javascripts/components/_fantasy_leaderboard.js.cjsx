@@ -12,6 +12,7 @@
     return (
       <div className="ui cards">
         <h1>Hello</h1>
+        <Treemap />
       </div>
     )
 

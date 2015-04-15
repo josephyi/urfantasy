@@ -14,6 +14,7 @@
 //= require vendor/underscore
 //= require vendor/pubsub
 //= require vendor/backbone
+//= require vendor/d3
 //= require react
 //= require react_ujs
 //= require semantic-ui

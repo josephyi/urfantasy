@@ -5,10 +5,8 @@
 
   render: ->
     return (
-      <div className="item" onClick={@search}>
+      <a className="item autocomplete" onClick={@search}>
         <img className="ui avatar image" src={@props.img} />
-        <div className="content">
-          <div className="header">{@props.name}</div>
-        </div>
-      </div>
+        {@props.name}
+      </a>
     )

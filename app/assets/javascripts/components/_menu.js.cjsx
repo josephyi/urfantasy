@@ -28,11 +28,16 @@
     console.log(event)
 
   search_change: (event) ->
-    autocomplete = _.filter(CHAMPIONS, (champion) ->
-      champion['key'].toLowerCase().indexOf(event.target.value.toLowerCase()) >= 0
-    )
-    @setState autocomplete: autocomplete
+    if event.target.value is ''
+      @setState autocomplete: null
+    else
+      autocomplete = _.filter(CHAMPIONS, (champion) ->
+        champion['key'].toLowerCase().indexOf(event.target.value.toLowerCase()) >= 0
+      )
+      @setState autocomplete: autocomplete
 
+  search_blur: (event) ->
+    @setState autocomplete: null
 
   render: ->
     fantasyClass = React.addons.classSet
@@ -49,23 +54,12 @@
       autocomplete = ''
 
     return (
-      <div className="ui vertical menu">
-        <a className={fantasyClass} onClick={@fantasyLeaderboard}>
-          Fantasy Leaderboard
-        </a>
-        <a className={championClass} onClick={@championLeaderboard}>
-          Champion Leaderboard
-        </a>
-        <a className="item">
-          How to Play
-        </a>
-        <div className="item">
-          <form className="ui transparent icon input" onSubmit={@search}>
-            <input type="text" placeholder="Search champions..." onChange={@search_change} />
-            <i className="search icon"></i>
-          </form>
-          {autocomplete}
-        </div>
+      <div className="item">
+        <form className="ui transparent icon input" onSubmit={@search}>
+          <input type="text" placeholder="Search champions..." onBlur={@search_blur} onChange={@search_change} />
+          <i className="search icon"></i>
+        </form>
+        {autocomplete}
       </div>
     )
 
