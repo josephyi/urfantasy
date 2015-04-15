@@ -52,6 +52,7 @@
         <Statistic label="KDA" value={@state.kda} />
         <Statistic label="Wins" value={@state.wins} />
         <Statistic label="Losses" value={@state.losses} />
-        <Statistic label="Ban Rate" value={(100 * @state.bans / @state.match_count).toFixed(2) + '%'} />
+        <Statistic label="Pick Rate" value={@state.pick_rate + '%'} />
+        <Statistic label="Ban Rate" value={@state.ban_rate + '%'} />
       </div>
     )

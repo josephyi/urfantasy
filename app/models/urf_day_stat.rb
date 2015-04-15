@@ -2,8 +2,8 @@ class UrfDayStat < ActiveRecord::Base
   extend Memoist
 
   POINTS_PER_KILL = 2
-  POINTS_PER_DEATH = -0.5
-  POINTS_PER_ASSIST = 1.5
+  POINTS_PER_DEATH = -1
+  POINTS_PER_ASSIST = 0.5
   POINTS_PER_CREEP_KILL = 0.01
   POINTS_PER_TRIPLE_KILL = 2
   POINTS_PER_QUADRA_KILL = 5
@@ -24,7 +24,7 @@ class UrfDayStat < ActiveRecord::Base
   # production match count
   TOTAL_MATCHES = 491322
 
-  def to_hash
+  def to_hash(total_match_count)
     {
       key: key,
       name: name,
@@ -49,7 +49,8 @@ class UrfDayStat < ActiveRecord::Base
       minions_killed: minions_killed,
       average_minions_killed: average_minions_killed,
       kda: kda.round(2),
-      bans: bans
+      ban_rate: ban_rate(total_match_count).round(2),
+      pick_rate: pick_rate(total_match_count).round(2)
     }
   end
 
@@ -65,12 +66,13 @@ class UrfDayStat < ActiveRecord::Base
   end
 
   def self.aggregate_single(args)
-    aggregate_relation(args).take.to_hash
+    match_count = UrfMatch.where({region: args[:region]}.compact).count
+    aggregate_relation(args).take.to_hash(match_count)
   end
 
   def self.aggregate_all(args)
     match_count = UrfMatch.where({region: args[:region]}.compact).count
-    aggregate_relation(args).all.to_a.map{|champ| champ.to_hash.merge!(match_count: match_count)}
+    aggregate_relation(args).all.to_a.map{|champ| champ.to_hash(match_count)}
   end
 
   def self.aggregate_historical(args)
@@ -143,6 +145,16 @@ class UrfDayStat < ActiveRecord::Base
 
   def creep_score
     minions_killed * POINTS_PER_CREEP_KILL
+  end
+
+  def ban_rate(total_match_count)
+    (100 * bans / total_match_count.to_f)
+  end
+
+  # For 1 match, a champ can be picked twice, so match count is doubled for maths
+  #
+  def pick_rate(total_match_count)
+    (wins + losses * 100) / (total_match_count * 2).to_f
   end
 
   # Can't do game bonus. D'Oh!
