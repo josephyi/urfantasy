@@ -23,15 +23,20 @@
 
   DAYS: [
     {name: 'All Days', selected: true, value: 'All'}
-    {name: 'March 31', selected: false, value: 0}
-    {name: 'April 1', selected: false, value: 1}
-    {name: 'April 2', selected: false, value: 2}
-    {name: 'April 3', selected: false, value: 3}
-    {name: 'April 4', selected: false, value: 4}
-    {name: 'April 5', selected: false, value: 5}
-    {name: 'April 6', selected: false, value: 6}
-    {name: 'April 7', selected: false, value: 7}
-
+    {name: 'Mar 31', selected: false, value: 0}
+    {name: 'Apr 1', selected: false, value: 1}
+    {name: 'Apr 2', selected: false, value: 2}
+    {name: 'Apr 3', selected: false, value: 3}
+    {name: 'Apr 4', selected: false, value: 4}
+    {name: 'Apr 5', selected: false, value: 5}
+    {name: 'Apr 6', selected: false, value: 6}
+    {name: 'Apr 7', selected: false, value: 7}
+    {name: 'Apr 8', selected: false, value: 8}
+    {name: 'Apr 9', selected: false, value: 9}
+    {name: 'Apr 10', selected: false, value: 10}
+    {name: 'Apr 11', selected: false, value: 11}
+    {name: 'Apr 12', selected: false, value: 12}
+    {name: 'Apr 13', selected: false, value: 13}
   ]
 
   home: (event) ->
