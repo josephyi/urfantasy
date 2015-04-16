@@ -7,11 +7,11 @@
 
   SCALES:
     popularity:
-        range: ["#b4544b","#ccc","#6bba70"]
-        domain: [5, 25, 50]
+      range: ["#b4544b","#ccc","#6bba70"]
+      domain: [5, 25, 50]
     ban_rate:
-        range: ["#6bba70","#ccc","#b4544b"]
-        domain: [5,25,50]
+      range: ["#6bba70","#ccc","#b4544b"]
+      domain: [5,25,50]
     win_rate:
       range: ["#7A1810","#3B3E40","#0F7015"]
       domain: [40,50,60]

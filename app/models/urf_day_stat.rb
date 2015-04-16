@@ -54,7 +54,8 @@ class UrfDayStat < ActiveRecord::Base
       ban_rate: ban_rate(total_match_count).round(1),
       pick_rate: pick_rate(total_match_count).round(1),
       win_rate: win_rate.round(1),
-      popularity: popularity(total_match_count).round(1)
+      popularity: popularity(total_match_count).round(1),
+      mirror_match_rate: mirror_match_rate.round(1)
     }
   end
 
@@ -191,6 +192,10 @@ class UrfDayStat < ActiveRecord::Base
 
   def win_rate
     (wins.to_f * 100) / matches
+  end
+
+  def mirror_match_rate
+    100.to_f * mirror_matches / matches
   end
 
   # Can't do game bonus. D'Oh!
