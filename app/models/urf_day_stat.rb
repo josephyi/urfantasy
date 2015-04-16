@@ -18,6 +18,7 @@ class UrfDayStat < ActiveRecord::Base
       sum(quadra_kills) as quadra_kills,
       sum(penta_kills) as penta_kills,
       sum(minions_killed) as minions_killed,
+      sum(mirror_matches) as mirror_matches,
       sum(wins) as wins,
       sum(losses) as losses,
       sum(bans) as bans'
@@ -50,9 +51,10 @@ class UrfDayStat < ActiveRecord::Base
       minions_killed: minions_killed,
       average_minions_killed: average_minions_killed,
       kda: kda.round(2),
-      ban_rate: ban_rate(total_match_count).round(2),
-      pick_rate: pick_rate(total_match_count).round(2),
-      win_rate: win_rate.round(2)
+      ban_rate: ban_rate(total_match_count).round(1),
+      pick_rate: pick_rate(total_match_count).round(1),
+      win_rate: win_rate.round(1),
+      popularity: popularity(total_match_count).round(1)
     }
   end
 
@@ -162,14 +164,18 @@ class UrfDayStat < ActiveRecord::Base
     (100 * bans / total_match_count.to_f)
   end
 
+  def popularity(total_match_count)
+    pick_rate(total_match_count) + ban_rate(total_match_count)
+  end
+
   # For 1 match, a champ can be picked twice, so match count is doubled for maths
   #
   def pick_rate(total_match_count)
-    (wins + losses * 100) / (total_match_count * 2).to_f
+    100.to_f * (matches - mirror_matches) / (total_match_count).to_f
   end
 
   def win_rate
-    (wins.to_f * 100) / (wins + losses)
+    (wins.to_f * 100) / matches
   end
 
   # Can't do game bonus. D'Oh!

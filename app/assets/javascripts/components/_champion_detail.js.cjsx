@@ -54,15 +54,17 @@
           </div>
           <img className="champion-img" src={"http://ddragon.leagueoflegends.com/cdn/img/champion/splash/#{@state.key}_0.jpg"} />
         </div>
-        <Statistic label="Average Score" value={@state.average_score} />
+
+        <Statistic label="Popularity" value={@state.popularity + '%'} />
+        <Statistic label="Pick Rate" value={@state.pick_rate + '%'} />
+        <Statistic label="Ban Rate" value={@state.ban_rate + '%'} />
+        <Statistic label="Win Rate" value={@state.win_rate + '%'} />
+        <Statistic label="Wins" value={@state.wins} />
+        <Statistic label="Losses" value={@state.losses} />
         <Statistic label="Average Kills" value={@state.average_kills} />
         <Statistic label="Average Deaths" value={@state.average_deaths} />
         <Statistic label="Average Assists" value={@state.average_assists} />
         <Statistic label="KDA" value={@state.kda} />
-        <Statistic label="Wins" value={@state.wins} />
-        <Statistic label="Losses" value={@state.losses} />
-        <Statistic label="Pick Rate" value={@state.pick_rate + '%'} />
-        <Statistic label="Ban Rate" value={@state.ban_rate + '%'} />
-        <Statistic label="Win Rate" value={@state.win_rate + '%'} />
+        <Statistic label="Average Score" value={@state.average_score} />
       </div>
     )

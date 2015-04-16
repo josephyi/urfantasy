@@ -15,8 +15,10 @@
   ]
 
   PIVOTS: [
+    {name: 'Popularity', selected: true, value:'popularity'}
     {name: 'Average Score', selected: true, value:'average_score'}
     {name: 'Win Rate', selected: false, value:'win_rate'}
+    {name: 'Ban Rate', selected: false, value:'ban_rate'}
   ]
 
   home: (event) ->
