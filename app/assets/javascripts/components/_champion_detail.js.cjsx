@@ -54,5 +54,6 @@
         <Statistic label="Losses" value={@state.losses} />
         <Statistic label="Pick Rate" value={@state.pick_rate + '%'} />
         <Statistic label="Ban Rate" value={@state.ban_rate + '%'} />
+        <Statistic label="Win Rate" value={@state.win_rate + '%'} />
       </div>
     )

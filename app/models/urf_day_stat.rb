@@ -51,7 +51,8 @@ class UrfDayStat < ActiveRecord::Base
       average_minions_killed: average_minions_killed,
       kda: kda.round(2),
       ban_rate: ban_rate(total_match_count).round(2),
-      pick_rate: pick_rate(total_match_count).round(2)
+      pick_rate: pick_rate(total_match_count).round(2),
+      win_rate: win_rate.round(2)
     }
   end
 
@@ -165,6 +166,10 @@ class UrfDayStat < ActiveRecord::Base
   #
   def pick_rate(total_match_count)
     (wins + losses * 100) / (total_match_count * 2).to_f
+  end
+
+  def win_rate
+    (wins.to_f * 100) / (wins + losses)
   end
 
   # Can't do game bonus. D'Oh!
