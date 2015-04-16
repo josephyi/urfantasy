@@ -2,7 +2,7 @@
   URL: "/stat/urf"
 
   DEFAULT:
-    color: 'average_score'
+    color: 'popularity'
     size: 'matches'
 
   SCALES:
