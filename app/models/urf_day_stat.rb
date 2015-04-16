@@ -1,5 +1,6 @@
 class UrfDayStat < ActiveRecord::Base
   extend Memoist
+  attr_accessor :avg_kills
 
   POINTS_PER_KILL = 2
   POINTS_PER_DEATH = -1
@@ -59,6 +60,15 @@ class UrfDayStat < ActiveRecord::Base
       day: urf_day,
       hour: hour_in_day
     }
+  end
+
+  def self.region_avg_stat(champion_id, stat, stat_order = 'DESC')
+    select(%Q[region, SUM(#{stat})::float / SUM(wins+losses) AS #{stat}])
+        .where(champion_id: champion_id)
+        .group(:region)
+        .having('sum(wins + losses) > 0')
+        .order("#{stat} #{stat_order}")
+        .order(region: :asc)
   end
 
   def self.aggregate_relation(args)
