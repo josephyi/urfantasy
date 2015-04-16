@@ -12,4 +12,3 @@ RUN bundle install
 
 ADD . /app
 WORKDIR /app
-RUN RAILS_ENV=production bundle exec rake assets:precompile --trace

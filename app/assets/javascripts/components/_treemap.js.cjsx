@@ -39,6 +39,11 @@
         region: data.value
       @get_data()
 
+    PubSub.subscribe 'dropdown.days', (msg, data) =>
+      @setState
+        day: data.value
+      @get_data()
+
     PubSub.subscribe 'dropdown.pivots', (msg, data) =>
       console.log data.value
       @setState
@@ -53,7 +58,12 @@
 
   get_data: ->
     url = @URL
-    url += "?region=#{@state.region}" if @state?.region? and @state.region isnt 'All'
+    if @state?.region?  || @state?.day?
+      params = {region: @state.region, day: @state.day}
+      delete params["region"] if @state.region == 'All' || !@state?.region?
+      delete params["day"] if @state.day == 'All' || !@state?.day?
+      querystring = $.param params
+      url += "?#{querystring}" if querystring.length > 0 # i sux at this
 
     d3.json(url, (error,response) =>
       @setState

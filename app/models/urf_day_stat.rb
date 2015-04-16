@@ -79,14 +79,29 @@ class UrfDayStat < ActiveRecord::Base
   end
 
   def self.aggregate_single(args)
-    match_count = UrfMatch.where({region: args[:region]}.compact).count
-    aggregate_relation(args).take.to_hash(match_count)
+    aggregate_relation(args).take.to_hash(match_count(args))
   end
 
   def self.aggregate_all(args)
-    match_count = UrfMatch.where({region: args[:region]}.compact).count
-    aggregate_relation(args).all.to_a.map{|champ| champ.to_hash(match_count)}
+    aggregate_relation(args).all.to_a.map{|champ| champ.to_hash(match_count(args))}
   end
+
+  class << self
+    extend Memoist
+    def match_count(args)
+      if args[:urf_day].present?
+        range = Bard::BUCKET_TIME_RANGE.(args[:urf_day].to_i)
+        if args[:region].present?
+          return UrfMatch.in_region_and_between(args[:region], range[:begin], range[:end]).count
+        else
+          return UrfMatch.on_and_after(range[:begin]).before(range[:end]).count
+        end
+      end
+      UrfMatch.where({region: args[:region]}.compact).count
+    end
+    memoize :match_count
+  end
+
 
   def self.aggregate_historical(args)
     self.select('urf_day, hour_in_day,'+AGGREGATE_SQL)

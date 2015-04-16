@@ -12,6 +12,11 @@ class Bard
     Time.at(bucket_time - 7.hours.to_i).hour + 1
   }
 
+  BUCKET_TIME_RANGE = -> day_of_urf {
+    {begin: URF_DAY_1_EPOCH + (86400 * (day_of_urf - 1)),
+     end: URF_DAY_1_EPOCH + (86400 * (day_of_urf))}
+  }
+
   CHAMPION_IDS = StaticData::CHAMPION_IDS
 
   def perform(bucket_time)
