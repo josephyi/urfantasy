@@ -16,4 +16,14 @@ class ApplicationController < ActionController::Base
       format.html { render 'application/index', layout: 'application' }
     end
   end
+
+  def data_cache(key, time=2.minutes)
+    return yield if  ActionController::Base.perform_caching.blank?
+    output = Rails.cache.fetch(key, {expires_in: time}) do
+      yield
+    end
+    return output
+  rescue
+    return yield
+  end
 end

@@ -7,12 +7,18 @@ class StatController < ApplicationController
   end
 
   def urf
-    respond_with UrfDayStat.aggregate_all(@query)
+    result = data_cache(request.url, 120.minutes) do
+      UrfDayStat.aggregate_all(@query)
+    end
+    respond_with result
   end
 
   def champion
     Integer(params[:champion_id]) # lazy protection vs SQL injection lel
-    respond_with UrfDayStat.aggregate_single(@query).merge(ReportService.champion_report(params[:champion_id]))
+    result = data_cache(request.url, 120.minutes) do
+      UrfDayStat.aggregate_single(@query).merge!(ReportService.champion_report(params[:champion_id]))
+    end
+    respond_with result
   end
 
 end
