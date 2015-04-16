@@ -22,6 +22,28 @@ body {
   padding: 2rem;
 }
 
+img {
+  max-width: 100%;
+}
+
+.ui.dropdown.left {
+  margin-left: 1rem;
+}
+
+.champion-header {
+  position: relative;
+
+  & h1 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba($black, 0.75);
+    padding: 10px 20px;
+    margin: 0;
+  }
+}
+
 .ui.vertical.menu {
   width: auto;
 }
@@ -32,9 +54,28 @@ body {
   font-size: inherit;
   text-align: left;
   color: #fff;
+  background: rgba($black, 0.85);
 
-  & .icon {
+  & .close.icon {
     font-size: 2rem;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+  }
+}
+
+.ui.statistic {
+  display: block;
+  float: left;
+  width: 33.3%;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  margin: 0;
+  padding: 20px 0;
+
+  & + .ui.statistic {
+    margin: 0;
   }
 }
 
@@ -125,6 +166,14 @@ svg {
   height: 100%;
   position: absolute;
   background: $black;
+}
+
+.cell {
+  opacity: 0.9;
+
+  &:hover {
+    opacity: 1;
+  }
 }
 
 .ui.list .item.autocomplete {
