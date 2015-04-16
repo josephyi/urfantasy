@@ -7,10 +7,10 @@
 
   SCALES:
     win_rate:
-      range: ["#b4544b","#ccc","#6bba70"]
+      range: ["#7A1810","#3B3E40","#0F7015"]
       domain: [40,50,60]
     average_score:
-      range: ["#b4544b","#ccc","#6bba70"]
+      range: ["#7A1810","#3B3E40","#0F7015"]
       domain: [0,15,30]
 
   getInitialState: ->

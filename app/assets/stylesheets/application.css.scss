@@ -205,6 +205,8 @@ svg {
 .cell {
   opacity: 0.9;
   cursor: pointer;
+  stroke: $black;
+  stroke-width: 1px;
 
   &:hover {
     opacity: 1;
