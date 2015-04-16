@@ -27,6 +27,10 @@
     event.preventDefault()
     PubSub.publish 'sidebar', {isOpen: false}
 
+  view_champion: (event) ->
+    event.preventDefault()
+    PubSub.publish 'sidebar', {isOpen: false}
+    App.router.navigate("/champions/#{@state.id}", true)
 
   render: ->
     sidebarClass  = "ui right sidebar menu vertical overlay inverted labeled icon "
@@ -44,7 +48,10 @@
       <div className={sidebarClass}>
         <i className="close icon" onClick={@_closeSidebar}></i>
         <div className="champion-header">
-          <h1>{@state.name}</h1>
+          <div className="champion-title">
+            <span className="champion-name">{@state.name}</span>
+            <a className="champion-button ui inverted button" onClick={@view_champion}>View Details</a>
+          </div>
           <img className="champion-img" src={"http://ddragon.leagueoflegends.com/cdn/img/champion/splash/#{@state.key}_0.jpg"} />
         </div>
         <Statistic label="Average Score" value={@state.average_score} />

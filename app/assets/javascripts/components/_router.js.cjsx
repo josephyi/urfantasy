@@ -29,4 +29,4 @@ class @Router extends Backbone.Router
   champion: (champion_id) ->
     # Clears out the content or else it wont get updated
     PubSub.publish "main", content:''
-    PubSub.publish "main", content: <ChampionDetail champion_id={champion_id} />
+    PubSub.publish "main", content: <ChampionPage champion_id={champion_id} />

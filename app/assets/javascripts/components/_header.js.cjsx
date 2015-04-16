@@ -19,11 +19,15 @@
     {name: 'Win Rate', selected: false, value:'win_rate'}
   ]
 
+  home: (event) ->
+    event.preventDefault()
+    App.router.navigate("/", true)
+
   render: ->
     return (
       <div className="ui secondary menu app-header">
         <div className="left menu">
-          <h3>For What It's Urf</h3>
+          <h3><a href='#' onClick={@home}>For What It's Urf</a></h3>
         </div>
         <Dropdown items={@REGIONS} title="regions" />
         <Dropdown items={@PIVOTS} title="pivots" />

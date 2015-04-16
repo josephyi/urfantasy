@@ -30,18 +30,52 @@ img {
   margin-left: 1rem;
 }
 
+.ui.dropdown .menu {
+  border-radius: 0.2857rem;
+  margin-top: 0.5em;
+
+  & > .item {
+    padding: 0.6em 0.8em;
+  }
+}
+
 .champion-header {
   position: relative;
+}
 
-  & h1 {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: rgba($black, 0.75);
-    padding: 10px 20px;
-    margin: 0;
+.champion-title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba($black, 0.75);
+  padding: 10px 20px;
+  margin: 0;
+  overflow: hidden;
+
+  .champion-page & {
+    top: 0;
+    bottom: auto;
+    padding: 20px 40px;
   }
+}
+
+.champion-name {
+  font-size: 2em;
+  float: left;
+  color: #fff;
+
+  .champion-page & {
+    font-size: 6em;
+  }
+}
+
+.champion-img {
+  width: 100%;
+}
+
+.champion-button {
+  float: right;
 }
 
 .ui.vertical.menu {
