@@ -15,10 +15,11 @@
   ]
 
   PIVOTS: [
-    {name: 'Average Score', selected: true, value:'average_score'}
+    {name: 'Fantasy Score', selected: true, value:'average_score'}
     {name: 'Pick/Ban Ratio', selected: true, value:'popularity'}
     {name: 'Win Rate', selected: false, value:'win_rate'}
     {name: 'Ban Rate', selected: false, value:'ban_rate'}
+    {name: 'KDA', selected: false, value:'kda'}
   ]
 
   DAYS: [

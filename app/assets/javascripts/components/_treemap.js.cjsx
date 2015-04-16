@@ -2,7 +2,7 @@
   URL: "/stat/urf"
 
   DEFAULT:
-    color: 'popularity'
+    color: 'average_score'
     size: 'matches'
 
   SCALES:
@@ -18,6 +18,9 @@
     average_score:
       range: ["#7A1810","#3B3E40","#0F7015"]
       domain: [0,15,30]
+    kda:
+      range: ["#7A1810","#3B3E40","#0F7015"]
+      domain: [1,1.5,3]
 
   getInitialState: ->
     if @props and @props.data
