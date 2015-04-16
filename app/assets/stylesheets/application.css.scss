@@ -170,9 +170,17 @@ svg {
 
 .cell {
   opacity: 0.9;
+  cursor: pointer;
 
   &:hover {
     opacity: 1;
+    & image {
+      opacity: 1;
+    }
+  }
+
+  & image {
+    opacity: 0.5;
   }
 }
 

@@ -22,18 +22,6 @@
 
   componentDidMount: ->
     @_subscribeToEvents()
-    el = @getDOMNode()
-    @color = d3.scale.linear()
-      .range(@SCALES[@state.color].range)
-      .domain(@SCALES[@state.color].domain)
-
-    @treemap = d3.layout.treemap()
-        .round(false)
-        .size([960, 500])
-        .sticky(true)
-        .value((d) =>
-          return d[@state.size]
-        )
 
   componentWillUnmount: ->
     @_unsubscribeFromEvents()
@@ -75,7 +63,7 @@
         .size([960, 500])
         .sticky(true)
         .value((d) =>
-          return d[@state.size]
+          return d[@state.size] + 5000
         )
 
     @color = d3.scale.linear()
@@ -105,7 +93,12 @@
       ).on('click', (d) =>
         PubSub.publish 'sidebar', _.extend(d, {isOpen: true})
       )
-
+    cells.append("svg:image")
+      .attr("xlink:href", (d)-> "http://ddragon.leagueoflegends.com/cdn/5.7.2/img/champion/#{d.key}.png")
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("width", 20)
+      .attr("height", 20)
 
   render: ->
     content = if @state?.data? then <Svg /> else <LoadingIndicator />
