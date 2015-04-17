@@ -17,9 +17,13 @@
 @import "semantic-ui";
 
 $black : #1B1C1D;
+$blacker: #0B0D0F;
+$light-black: #2B2E30;
 
 body {
   padding: 2rem;
+  background: $black;
+  color: #fff;
 }
 
 img {
@@ -43,12 +47,19 @@ img {
   position: relative;
 }
 
+.champion-header-stats {
+  position: absolute;
+  top: 200px;
+  left: 0;
+  width: 100%;
+}
+
 .champion-title {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  background: rgba($black, 0.75);
+  background: rgba($blacker, 0.75);
   padding: 10px 20px;
   margin: 0;
   overflow: hidden;
@@ -176,6 +187,7 @@ img {
   color: #fff;
   z-index: 100;
   background: $black;
+  border-bottom: 1px solid $blacker;
 
   h3 {
     margin: 0;
@@ -193,6 +205,7 @@ img {
   bottom: 0;
   right: 0;
   left: 0;
+  overflow-y:auto;
 }
 
 svg {
@@ -220,6 +233,18 @@ svg {
   }
 }
 
+.cell-tooltip {
+  opacity: 0;
+
+  .cell:hover & {
+    opacity: 1;
+  }
+}
+
+.cell-tooltip-text {
+  fill: #fff;
+}
+
 .ui.list .item.autocomplete {
   padding-left: 0;
   padding-right: 0;
@@ -231,4 +256,91 @@ svg {
   & .image {
     margin-right: 0.5em;
   }
+}
+
+.bar-graphs {
+  padding: 2rem;
+}
+
+.bar-graph {
+  margin-bottom: 3.5em;
+  font-size: 1.25em;
+
+  &.small {
+    font-size: 0.75em;
+    margin-bottom: 1em;
+  }
+}
+
+.bar-graph-sub {
+  max-height: 0;
+  transition: all 0.3s ease;
+  margin-top: -1.5em;
+  overflow: hidden;
+  border-radius: 0 0 1em 1em;
+
+  &.shown {
+    max-height: 100rem;
+    padding: 2.5em 1em 1em 1em;
+    background: $light-black;
+  }
+}
+
+.bar-graph-title {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 1.25em;
+  opacity: 0.5;
+  margin-bottom: 0.5em;
+}
+
+.bar-graph-data {
+  position: relative;
+  background: $light-black;
+  border-radius: 100em;
+
+  .icon {
+    position: absolute;
+    right: 1em;
+    top: 0;
+    line-height: 3;
+    transition: all 0.3s ease;
+    opacity: 0.75;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+.bar-graph-data-value {
+  height: 3em;
+  background: green;
+  border-radius: 100em;
+  width: 0%;
+  max-width: 100%;
+
+  &.small {
+    height: 2em;
+  }
+}
+
+.bar-graph-value {
+  position: absolute;
+  top: 0;
+  left: 2em;
+  line-height: 3;
+  color: #fff;
+  font-weight: 600;
+
+  &.small {
+    line-height: 2;
+    left: 1em;
+  }
+}
+
+.champion-section-title {
+  font-size: 5em;
+  text-align: center;
 }

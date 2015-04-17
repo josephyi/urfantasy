@@ -1,3 +1,8 @@
+@OVERAL_STATS =
+  average_deaths: 9.89
+  average_kills: 9.84
+  average_assists: 9.63
+
 @CHAMPIONS = [
   {key:"Annie", name:"Annie", champion_id:1},
   {key:"Olaf", name:"Olaf", champion_id:2},

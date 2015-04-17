@@ -36,7 +36,12 @@ class ReportService
     ORDER BY avg_#{stat} #{stat_order}, REGION ASC
     ]
 
-    ActiveRecord::Base.connection.execute(sql).to_a
+    ActiveRecord::Base.connection.execute(sql).to_a.to_a.map{|a|
+      {
+        'region' => a['region'],
+        "avg_#{stat}" => a["avg_#{stat}"].to_f.round(2)
+      }
+    }
   end
 
   def self.avg_kda(champion_id)
@@ -62,7 +67,7 @@ class ReportService
     ORDER BY win_rate DESC, REGION ASC
     ]
 
-    ActiveRecord::Base.connection.execute(sql).to_a
+    ActiveRecord::Base.connection.execute(sql).to_a.map{|win|{region:win['region'],win_rate:win['win_rate'].to_f.round(2)}}
   end
 
   def self.pick_rates(champion_id)
@@ -94,13 +99,13 @@ class ReportService
 
     matches_by_region.map{|a| {a['region'.freeze] => a['match_count'.freeze].to_i}}.reduce(:merge).merge(
       bans.map{|a| {a['region'] => a['region_bans'.freeze].to_i}}.reduce(:merge)
-    ){|k, v1, v2| 100.to_f * v2 / v1}.map{|k, v| {'region'.freeze => k, 'ban_rate'.freeze => v}}
+    ){|k, v1, v2| 100.to_f * v2 / v1}.map{|k, v| {'region'.freeze => k, 'ban_rate'.freeze => v.round(2)}}
   end
 
   def self.pick_ban_ratio(champion_id)
     matches_by_region.map{|a| {a['region'.freeze] => a['match_count'.freeze].to_i}}.reduce(:merge).merge(
         unique_match_presence(champion_id).map{|a| {a['region'] => a['match_count'.freeze].to_i}}.reduce(:merge)
-    ){|k, v1, v2| v2 * 100.to_f / v1}.map{|k, v| {'region'.freeze => k, 'pick_ban_ratio'.freeze => v}}.sort_by {
+    ){|k, v1, v2| v2 * 100.to_f / v1}.map{|k, v| {'region'.freeze => k, 'pick_ban_ratio'.freeze => v.round(2)}}.sort_by {
       |entry| entry['pick_ban_ratio'.freeze]
     }.reverse!
   end

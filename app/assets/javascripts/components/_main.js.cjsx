@@ -10,9 +10,7 @@
     @_unsubscribeFromEvents()
 
   _subscribeToEvents: ->
-    # When the reset button is clicked...
     PubSub.subscribe 'main', (msg, data)=>
-      console.log(data)
       @setState data
 
   _unsubscribeFromEvents: ->

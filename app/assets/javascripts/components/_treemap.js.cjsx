@@ -101,11 +101,14 @@
       .data(nodes)
 
     cells.transition()
+      .duration(750)
       .attr("transform", (d) ->
         return "translate(" + d.x + "," + d.y + ")"
       )
 
     cells.select("rect")
+      .transition()
+      .duration(750)
       .attr("width", (d) ->
         return d.dx
       )
@@ -157,6 +160,7 @@
         return d.dy
       )
       .style("fill", (d) =>
+        console.log(@color( d[@state.color] ))
         return @color( d[@state.color] )
       ).on('click', (d) =>
         PubSub.publish 'sidebar', _.extend(d, {isOpen: true})
@@ -169,9 +173,22 @@
       .attr("width", 20)
       .attr("height", 20)
 
+    # cells.append("svg:rect")
+    #   .attr("class", "cell-tooltip")
+    #   .attr("x", 0)
+    #   .attr("y", 0)
+    #   .attr("width", 100)
+    #   .attr("height", 20)
+    #   .append("svg:text")
+    #   .attr("class", "cell-tooltip-text")
+    #   .attr("dy", 20)
+    #   .attr("text-anchor", "middle")
+    #   .text((d) ->
+    #     return d.name )
+
 
   render: ->
-    content = if @state?.data? then <Svg /> else <LoadingIndicator />
+    content = if @state?.data? then <Svg classname="treemap" group_classname="treemap-points" viewbox="0 0 960 500" preserveAspectRatio="none" /> else <LoadingIndicator />
     champion_detail = <ChampionDetail {...@state.selected_champion} /> if @state?.selected_champion?
     return (
       <div>
