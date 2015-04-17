@@ -4,9 +4,11 @@ class ReportService
     {
         avg_death_stats: avg_stat(champion_id, 'deaths', 'ASC'),
         avg_kill_stats: avg_stat(champion_id, 'kills'),
+        avg_assists_stats: avg_stat(champion_id, 'assists'),
         ban_rates: ban_rates(champion_id),
         win_rates: win_rate(champion_id),
-        pick_ban_ratio: pick_ban_ratio(champion_id)
+        pick_ban_ratio: pick_ban_ratio(champion_id),
+        penta_kills: penta_kills_ratio(champion_id)
     }
   end
 
@@ -60,6 +62,23 @@ class ReportService
     }.reverse!
   end
 
+  def self.penta_kills_ratio(champion_id)
+    sql = %Q[
+    SELECT region, SUM(penta_kills) AS region_penta_kills
+    FROM urf_day_stats
+    WHERE champion_id = #{champion_id}
+    GROUP BY region
+    ORDER BY region_penta_kills DESC, REGION ASC
+    ]
+
+    result = ActiveRecord::Base.connection.execute(sql).to_a
+    matches_by_region.map{|a| {a['region'.freeze] => a['match_count'.freeze].to_i}}.reduce(:merge).merge(
+        result.map{|a| {a['region'] => a['region_penta_kills'.freeze].to_i}}.reduce(:merge)
+    ){|k, v1, v2| v2.to_f / v1}.map{|k, v| {'region'.freeze => k, 'penta_kills_ratio'.freeze => v}}.sort_by {
+        |entry| entry['penta_kills_ratio'.freeze]
+    }.reverse!
+  end
+
   class << self
     extend Memoist
     def matches_by_region
@@ -68,7 +87,6 @@ class ReportService
     end
     memoize :matches_by_region
   end
-
 
   def self.unique_match_presence(champion_id)
     sql = %Q[
