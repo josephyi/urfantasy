@@ -59,10 +59,8 @@
         <Statistic label="Pick Rate" value={@state.pick_rate + '%'} />
         <Statistic label="Ban Rate" value={@state.ban_rate + '%'} />
         <Statistic label="Win Rate" value={@state.win_rate + '%'} />
-        <Statistic label="Win Rate" value={@state.win_rate + '%'} />
         <Statistic label="Wins" value={@state.wins} />
         <Statistic label="Losses" value={@state.losses} />
-        <Statistic label="Mirror Matches" value={@state.mirror_match_rate + '%'} />
         <Statistic label="Average Kills" value={@state.average_kills} />
         <Statistic label="Average Deaths" value={@state.average_deaths} />
         <Statistic label="Average Assists" value={@state.average_assists} />

@@ -95,7 +95,7 @@ class ReportService
 
     matches_by_region.map{|a| {a['region'.freeze] => a['match_count'.freeze].to_i}}.reduce(:merge).merge(
         result.map{|a| {a['region'] => a['match_presence'.freeze].to_i}}.reduce(:merge)
-    ){|k, v1, v2| 100.to_f * v2 / v1}.map{|k, v| {'region'.freeze => k, 'pick_rate'.freeze => v}}
+    ){|k, v1, v2| 100.to_f * v2 / v1}.map{|k, v| {'region'.freeze => k, 'pick_rate'.freeze => v.round(2)}}
   end
 
   def self.ban_rates(champion_id)

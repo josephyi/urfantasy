@@ -127,6 +127,7 @@ img {
 .ui.statistics .statistic > .value,
 .ui.statistic > .value {
   color: inherit;
+  font-size:2rem;
 }
 .ui.statistics .statistic > .label,
 .ui.statistic > .label {
@@ -319,6 +320,7 @@ svg {
   background: green;
   border-radius: 100em;
   width: 0%;
+  min-width: 3em;
   max-width: 100%;
 
   &.small {
@@ -343,4 +345,20 @@ svg {
 .champion-section-title {
   font-size: 5em;
   text-align: center;
+}
+
+.champion-badges {
+  position: absolute;
+  top: 200px;
+  left: 0;
+}
+
+.champion-badge {
+  line-height: 3;
+  padding: 0 40px;
+  color: #fff;
+  font-size: 2em;
+  margin-bottom: 20px;
+  opacity: 0.8;
+  border-radius: 0 2em 2em 0;
 }

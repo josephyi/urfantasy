@@ -22,7 +22,7 @@
         <div className="small bar-graph-title">{@props.title}</div>
         <div className="small bar-graph-data">
           <div className="small bar-graph-data-value" style={width:width,background:background}></div>
-          <div className="small bar-graph-value">{@props.value}</div>
+          <div className="small bar-graph-value">{value}</div>
         </div>
       </div>
     )

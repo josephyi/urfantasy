@@ -1,4 +1,4 @@
-@OVERAL_STATS =
+@OVERALL_STATS =
   average_deaths: 9.89
   average_kills: 9.84
   average_assists: 9.63
