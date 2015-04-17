@@ -20,13 +20,13 @@
       domain: [0,15,30]
     kda:
       range: ["#7A1810","#3B3E40","#0F7015"]
-      domain: [1,1.5,3]
+      domain: [1,2,3]
 
   getInitialState: ->
     if @props and @props.data
       return _.extend @DEFAULT, @props
     else
-      @get_data()
+      @_get_data()
       return @DEFAULT
 
   componentDidMount: ->
@@ -35,31 +35,42 @@
   componentWillUnmount: ->
     @_unsubscribeFromEvents()
 
+
+  # Don't update the component if we are just changing region or day
+  # because the ajax call hasnt finished yet
+  shouldComponentUpdate: (props, state) ->
+    return false if state.region isnt @state.region
+    return false if state.day    isnt @state.day
+    return true
+
+  componentDidUpdate: ->
+    if @treemap
+      @_update_graph()
+    else
+      @_build_graph()
+
+
   _subscribeToEvents: ->
     # When the reset button is clicked...
     PubSub.subscribe 'dropdown.regions', (msg, data) =>
       @setState
         region: data.value
-      @get_data()
+      @_get_data()
 
     PubSub.subscribe 'dropdown.days', (msg, data) =>
       @setState
         day: data.value
-      @get_data()
+      @_get_data()
 
     PubSub.subscribe 'dropdown.pivots', (msg, data) =>
-      console.log data.value
       @setState
         color: data.value
 
   _unsubscribeFromEvents: ->
     PubSub.unsubscribe 'dropdown'
 
-  update: (event) =>
-    event.preventDefault() if event
-    @get_data()
 
-  get_data: ->
+  _get_data: ->
     url = @URL
     if @state?.region?  || @state?.day?
       params = {region: @state.region, day: @state.day}
@@ -75,29 +86,67 @@
           children: response
     )
 
+  _update_graph: ->
+    @color = @color
+      .range(@SCALES[@state.color].range)
+      .domain(@SCALES[@state.color].domain)
 
-  componentDidUpdate: ->
+    nodes = @treemap.nodes(@state.data)
+      .filter((d) ->
+        return !d.children
+      )
+
+    cells = d3.select(".treemap-points")
+      .selectAll("g.cell")
+      .data(nodes)
+
+    cells.transition()
+      .attr("transform", (d) ->
+        return "translate(" + d.x + "," + d.y + ")"
+      )
+
+    cells.select("rect")
+      .attr("width", (d) ->
+        return d.dx
+      )
+      .attr("height", (d) ->
+        return d.dy
+      )
+      .style("fill", (d) =>
+        return @color( d[@state.color] )
+      )
+
+    cells.select("image")
+      .attr("xlink:href", (d)-> "http://ddragon.leagueoflegends.com/cdn/5.7.2/img/champion/#{d.key}.png")
+
+
+  _build_graph: ->
     @treemap = d3.layout.treemap()
-        .round(false)
+        .round(true)
         .size([960, 500])
-        .sticky(true)
         .value((d) =>
-          return d[@state.size] + 5000
-        )
+          return d[@state.size] + 5000 )
+        .sort((a,b) =>
+          return a[@state.size] - b[@state.size] )
 
     @color = d3.scale.linear()
       .range(@SCALES[@state.color].range)
       .domain(@SCALES[@state.color].domain)
-    console.log(@state.data)
+
     nodes = @treemap.nodes(@state.data)
-    chart = d3.select(".treemap-points")
-    cells = chart.selectAll("g.cell.parent").data(nodes)
-                 .enter()
-                 .append("svg:g")
-                 .attr("class", "cell")
-                 .attr("transform", (d) ->
-                   return "translate(" + d.x + "," + d.y + ")"
-                 )
+      .filter((d) ->
+        return !d.children
+      )
+
+    cells = d3.select(".treemap-points")
+      .selectAll("g.cell")
+      .data(nodes)
+      .enter()
+      .append("svg:g")
+      .attr("class", "cell")
+      .attr("transform", (d) ->
+        return "translate(" + d.x + "," + d.y + ")"
+      )
 
     cells.append("svg:rect")
       .attr("class", "cell-box")
@@ -112,12 +161,14 @@
       ).on('click', (d) =>
         PubSub.publish 'sidebar', _.extend(d, {isOpen: true})
       )
+
     cells.append("svg:image")
       .attr("xlink:href", (d)-> "http://ddragon.leagueoflegends.com/cdn/5.7.2/img/champion/#{d.key}.png")
       .attr("x", 0)
       .attr("y", 0)
       .attr("width", 20)
       .attr("height", 20)
+
 
   render: ->
     content = if @state?.data? then <Svg /> else <LoadingIndicator />
