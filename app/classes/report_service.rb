@@ -13,6 +13,18 @@ class ReportService
     }
   end
 
+  def self.avg_kill_rank(region = nil)
+    sql = %Q[
+    select champion_id, sum(kills::float)/sum(wins + losses) avg_kills
+    from urf_day_stats
+    #{"where region = ''" + region + "'" if region.present?}
+    group by champion_id
+    order by avg_kills DESC
+    ]
+
+    ActiveRecord::Base.connection.execute(sql).to_a
+  end
+
   def self.avg_stat(champion_id, stat, stat_order = 'DESC')
     sql = %Q[
     SELECT region, SUM(#{stat})::float / SUM(wins+losses) AS avg_#{stat}

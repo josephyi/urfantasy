@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   get 'champions/:champion_id' => 'champions#show'
   get 'stat/urf' => 'stat#urf', defaults: {   format: 'json' }
   get 'stat/champion/:champion_id' => 'stat#champion', defaults: {   format: 'json' }
+  get 'stat/ranking/kills' => 'stat#kills', defaults: {   format: 'json' }
+  get 'stat/ranking/kills/:region' => 'stat#kills', defaults: {   format: 'json' }
 
 
   # Example of named route that can be invoked with purchase_url(id: product.id)

@@ -21,4 +21,10 @@ class StatController < ApplicationController
     respond_with result
   end
 
+  def kills
+    result = data_cache(request.url, 120.minutes) do
+      ReportService.avg_kill_rank(params[:region])
+    end
+    respond_with result
+  end
 end
