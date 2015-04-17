@@ -17,7 +17,7 @@ class ReportService
     sql = %Q[
     select champion_id, sum(kills::float)/sum(wins + losses) avg_kills
     from urf_day_stats
-    #{"where region = ''" + region + "'" if region.present?}
+    #{"where region = '" + region + "'" if region.present?}
     group by champion_id
     order by avg_kills DESC
     ]
