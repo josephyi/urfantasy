@@ -7,8 +7,9 @@ class ReportService
         avg_assists_stats: avg_stat(champion_id, 'assists'),
         avg_kda: avg_kda(champion_id),
         avg_penta_kills: avg_stat(champion_id, 'penta_kills'),
+        win_rates: win_rates(champion_id),
+        pick_rates: pick_rates(champion_id),
         ban_rates: ban_rates(champion_id),
-        win_rates: win_rate(champion_id),
         pick_ban_ratio: pick_ban_ratio(champion_id)
     }
   end
@@ -51,7 +52,7 @@ class ReportService
     ActiveRecord::Base.connection.execute(sql).to_a
   end
 
-  def self.win_rate(champion_id)
+  def self.win_rates(champion_id)
     sql = %Q[
     SELECT region, 100 * SUM(wins)::float/SUM(wins+losses) AS win_rate
     FROM urf_day_stats
@@ -62,6 +63,22 @@ class ReportService
     ]
 
     ActiveRecord::Base.connection.execute(sql).to_a
+  end
+
+  def self.pick_rates(champion_id)
+    sql = %Q[
+    SELECT region, SUM(wins + losses - mirror_matches) AS match_presence
+    FROM urf_day_stats
+    WHERE champion_id = #{champion_id}
+    GROUP BY region
+    ORDER BY match_presence DESC, REGION ASC
+    ]
+
+    result = ActiveRecord::Base.connection.execute(sql).to_a
+
+    matches_by_region.map{|a| {a['region'.freeze] => a['match_count'.freeze].to_i}}.reduce(:merge).merge(
+        result.map{|a| {a['region'] => a['match_presence'.freeze].to_i}}.reduce(:merge)
+    ){|k, v1, v2| 100.to_f * v2 / v1}.map{|k, v| {'region'.freeze => k, 'pick_rate'.freeze => v}}
   end
 
   def self.ban_rates(champion_id)

@@ -184,8 +184,6 @@ class UrfDayStat < ActiveRecord::Base
     pick_rate(total_match_count) + ban_rate(total_match_count)
   end
 
-  # For 1 match, a champ can be picked twice, so match count is doubled for maths
-  #
   def pick_rate(total_match_count)
     100.to_f * (matches - mirror_matches) / (total_match_count).to_f
   end
