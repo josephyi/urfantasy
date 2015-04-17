@@ -1,7 +1,7 @@
 @Header = React.createClass
 
   REGIONS: [
-    {name: 'All Regions', selected: true, value: 'All'}
+    {name: 'All', selected: true, value: 'All'}
     {name: 'na', selected: false, value: 'na'}
     {name: 'br', selected: false, value: 'br'}
     {name: 'eune', selected: false, value: 'eune'}
@@ -15,8 +15,8 @@
   ]
 
   PIVOT_SIZES: [
-    {name: 'Matches', selected: true, value: 'matches'}
-    {name: 'Pick/Ban Ratio', selected: false, value:'popularity'}
+    {name: 'Picks', selected: true, value: 'pick_rate'}
+    {name: 'Pick+Ban Ratio', selected: false, value:'popularity'}
     {name: 'Win Rate', selected: false, value: 'win_rate'}
     {name: 'Avg Kills', selected: false, value:'average_kills'}
     {name: 'Avg Deaths', selected: false, value:'average_deaths'}
@@ -29,7 +29,7 @@
   PIVOTS: [
     {name: 'Fantasy Score', selected: true, value:'average_score'}
     {name: 'Pick Rate', selected: false, value:'pick_rate'}
-    {name: 'Pick/Ban Ratio', selected: false, value:'popularity'}
+    {name: 'Pick+Ban Ratio', selected: false, value:'popularity'}
     {name: 'Win Rate', selected: false, value:'win_rate'}
     {name: 'Ban Rate', selected: false, value:'ban_rate'}
     {name: 'Avg Kills', selected: false, value:'average_kills'}
@@ -41,7 +41,7 @@
   ]
 
   DAYS: [
-    {name: 'All Days', selected: true, value: 'All'}
+    {name: 'All', selected: true, value: 'All'}
     {name: 'Mar 31', selected: false, value: 0}
     {name: 'Apr 1', selected: false, value: 1}
     {name: 'Apr 2', selected: false, value: 2}

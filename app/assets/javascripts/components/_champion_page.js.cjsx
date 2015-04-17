@@ -100,8 +100,6 @@
             <Badge value={@props.pick_rank} title="Picks" color={color(@props.pick_rank)} />
             <Badge value={@props.wins_rank} title="Wins" color={color(@props.wins_rank)} />
             <Badge value={@props.kills_rank} title="Kills" color={color(@props.kills_rank)} />
-            <Badge value={@props.deaths_rank} title="Deaths" color={color(@props.deaths_rank)} />
-            <Badge value={@props.assists_rank} title="Assists" color={color(@props.assists_rank)} />
             <Badge value={@props.pentakill_rank} title="Pentakills" color={color(@props.pentakill_rank)} />
           </div>
           <i className="icon angle down" onClick={@scroll}></i>
