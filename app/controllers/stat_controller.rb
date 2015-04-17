@@ -3,6 +3,7 @@ class StatController < ApplicationController
   before_filter :prepare_params
 
   def prepare_params
+    raise ArgumentError if params[:region].present? && !StaticData::REGIONS.include?(params[:region])
     @query ||= {region: params[:region], urf_day: params[:day], hour_in_day: params[:hour], champion_id: params[:champion_id]}.compact
   end
 
@@ -22,8 +23,16 @@ class StatController < ApplicationController
   end
 
   def kills
+    # SQL injection guard
     result = data_cache(request.url, 120.minutes) do
       ReportService.avg_kill_rank(params[:region])
+    end
+    respond_with result
+  end
+
+  def deaths
+    result = data_cache(request.url, 120.minutes) do
+      ReportService.avg_death_rank(params[:region])
     end
     respond_with result
   end

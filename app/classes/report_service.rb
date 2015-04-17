@@ -13,6 +13,18 @@ class ReportService
         pick_ban_ratio: pick_ban_ratio(champion_id)
     }
   end
+#select champion_id, sum(deaths::float)/sum(wins + losses) avg_deaths from urf_day_stats group by champion_id order by avg_deaths asc limit 1;
+  def self.avg_death_rank(region = nil)
+    sql = %Q[
+    select champion_id, sum(deaths::float)/sum(wins + losses) avg_deaths
+    from urf_day_stats
+    #{"where region = '" + region + "'" if region.present?}
+    group by champion_id
+    order by avg_deaths ASC
+    ]
+
+    ActiveRecord::Base.connection.execute(sql).to_a
+  end
 
   def self.avg_kill_rank(region = nil)
     sql = %Q[
