@@ -1,9 +1,7 @@
 class @Router extends Backbone.Router
   routes:
     '': 'root'
-    'scoreboard'          : 'championLeaderboard'
-    'scoreboard/top/:day' : 'championLeaderboard'
-    'fantasy-leaderboard' : 'fantasyLeaderboard'
+    'about': 'about'
     'champions/:champion_id' : 'champion'
 
   initialize: ->
@@ -19,12 +17,8 @@ class @Router extends Backbone.Router
   root: ->
     PubSub.publish "main", content: <Home />
 
-  championLeaderboard: (day) ->
-    day ?= 1
-    PubSub.publish "main", content: <Scoreboard day={day} />
-
-  fantasyLeaderboard: ->
-    PubSub.publish "main", content: <FantasyLeaderboard />
+  about: ->
+    PubSub.publish "main", content: <About />
 
   champion: (champion_id) ->
     # Clears out the content or else it wont get updated

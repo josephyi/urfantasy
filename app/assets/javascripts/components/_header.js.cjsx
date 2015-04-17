@@ -15,11 +15,11 @@
   ]
 
   PIVOTS: [
-    {name: 'Fantasy Score', selected: true, value:'average_score'}
-    {name: 'Pick/Ban Ratio', selected: true, value:'popularity'}
-    {name: 'Win Rate', selected: false, value:'win_rate'}
-    {name: 'Ban Rate', selected: false, value:'ban_rate'}
-    {name: 'KDA', selected: false, value:'kda'}
+    {name: 'Fantasy Score', selected: true, value:'average_score', size:'matches'}
+    {name: 'Pick/Ban Ratio', selected: true, value:'popularity', size:'wins'}
+    {name: 'Win Rate', selected: false, value:'win_rate', size:'matches'}
+    {name: 'Ban Rate', selected: false, value:'ban_rate', size:'wins'}
+    {name: 'KDA', selected: false, value:'kda', size:'kills'}
   ]
 
   DAYS: [
@@ -44,6 +44,10 @@
     event.preventDefault()
     App.router.navigate("/", true)
 
+  about: (event) ->
+    event.preventDefault()
+    App.router.navigate("/about", true)
+
   render: ->
     return (
       <div className="ui secondary menu app-header">
@@ -53,6 +57,7 @@
         <Dropdown items={@REGIONS} title="regions" />
         <Dropdown items={@DAYS} title="days" />
         <Dropdown items={@PIVOTS} title="pivots" />
+        <a href="#" className="left menu about-link" onClick={@about}>About</a>
         <div className="ui right vertical menu app-header-search">
           <Menu />
         </div>

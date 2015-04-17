@@ -7,11 +7,11 @@
 
   SCALES:
     popularity:
-      range: ["#b4544b","#ccc","#6bba70"]
-      domain: [0, 25, 50]
+      range: ["#7A1810","#3B3E40","#0F7015"]
+      domain: [1, 25, 60]
     ban_rate:
-      range: ["#6bba70","#ccc","#b4544b"]
-      domain: [0,30,60]
+      range: ["#7A1810","#3B3E40","#0F7015"]
+      domain: [1,10,50]
     win_rate:
       range: ["#7A1810","#3B3E40","#0F7015"]
       domain: [40,50,60]
@@ -65,6 +65,7 @@
     PubSub.subscribe 'dropdown.pivots', (msg, data) =>
       @setState
         color: data.value
+        size: data.size || @state.size
 
   _unsubscribeFromEvents: ->
     PubSub.unsubscribe 'dropdown'
@@ -91,10 +92,12 @@
       .range(@SCALES[@state.color].range)
       .domain(@SCALES[@state.color].domain)
 
+    @treemap = @treemap.value((d) =>
+      return d[@state.size] )
+
     nodes = @treemap.nodes(@state.data)
       .filter((d) ->
-        return !d.children
-      )
+        return !d.children )
 
     cells = d3.select(".treemap-points")
       .selectAll("g.cell")
@@ -160,7 +163,6 @@
         return d.dy
       )
       .style("fill", (d) =>
-        console.log(@color( d[@state.color] ))
         return @color( d[@state.color] )
       ).on('click', (d) =>
         PubSub.publish 'sidebar', _.extend(d, {isOpen: true})
