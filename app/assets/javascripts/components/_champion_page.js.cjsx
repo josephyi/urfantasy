@@ -35,6 +35,11 @@
       if champ.id.toString() is @props.champion_id
         @props.fantasy_rank = i
         break
+    for champ, i in OVERALL_STATS.pentakill_leaderboard
+      i++
+      if champ.id.toString() is @props.champion_id
+        @props.pentakill_rank = i
+        break
 
   componentWillUnmount: ->
 
@@ -73,6 +78,8 @@
       return {title: stat.region, value: stat.win_rate} )
     pick_ban_ratio = _.map(@state.pick_ban_ratio, (stat) ->
       return {title: stat.region, value: stat.pick_ban_ratio} )
+    kda_stats = _.map(@state.avg_kda, (stat) ->
+      return {title: stat.region, value: stat.kda} )
 
 
     return (
@@ -88,6 +95,7 @@
             <Badge value={@props.deaths_rank} title="Deaths" color={color(@props.deaths_rank)} />
             <Badge value={@props.assists_rank} title="Assists" color={color(@props.assists_rank)} />
             <Badge value={@props.wins_rank} title="Wins" color={color(@props.wins_rank)} />
+            <Badge value={@props.pentakill_rank} title="Pentakills" color={color(@props.pentakill_rank)} />
           </div>
           <i className="icon angle down" onClick={@scroll}></i>
         </div>
@@ -103,7 +111,7 @@
           <Graph value={@state.average_kills} title="Average Kills" max=16 min=4 values={kill_stats} />
           <Graph value={@state.average_deaths} title="Average Deaths" max=16 min=7 values={death_stats} reverse=true />
           <Graph value={@state.average_assists} title="Average Assists" max=17 min=4 values={assist_stats} />
-          <Graph value={@state.kda} title="Average KDA" max=3 min=1 />
+          <Graph value={@state.kda} title="Average KDA" max=3 min=1 values={kda_stats} />
         </div>
       </div>
     )

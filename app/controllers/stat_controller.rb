@@ -21,19 +21,4 @@ class StatController < ApplicationController
     end
     respond_with result
   end
-
-  def kills
-    # SQL injection guard
-    result = data_cache(request.url, 120.minutes) do
-      ReportService.avg_kill_rank(params[:region])
-    end
-    respond_with result
-  end
-
-  def deaths
-    result = data_cache(request.url, 120.minutes) do
-      ReportService.avg_death_rank(params[:region])
-    end
-    respond_with result
-  end
 end

@@ -48,7 +48,7 @@ class ReportService
     ORDER BY avg_#{stat} #{stat_order}, REGION ASC
     ]
 
-    ActiveRecord::Base.connection.execute(sql).to_a.to_a.map{|a|
+    ActiveRecord::Base.connection.execute(sql).to_a.map{|a|
       {
         'region' => a['region'],
         "avg_#{stat}" => a["avg_#{stat}"].to_f.round(2)
@@ -58,7 +58,7 @@ class ReportService
 
   def self.avg_kda(champion_id)
     sql = %Q[
-    SELECT region, SUM(kills + assists)/sum(deaths)::float AS kda
+    SELECT region, ROUND(cast(SUM(kills + assists)/sum(deaths)::float as numeric), 2) AS kda
     FROM urf_day_stats
     WHERE champion_id = #{champion_id}
     GROUP BY region

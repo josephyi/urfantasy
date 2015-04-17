@@ -65,7 +65,7 @@
         <Statistic label="Average Deaths" value={@state.average_deaths} />
         <Statistic label="Average Assists" value={@state.average_assists} />
         <Statistic label="KDA" value={@state.kda} />
-        <Statistic label="Games per Pentakill" value={@state.games_to_penta} />
+        <Statistic label="Pentakill Frequency" value={'1:' + @state.games_to_penta} />
         <Statistic label="Fantasy Score" value={@state.average_score} />
       </div>
     )

@@ -10,7 +10,7 @@
       range: ["#7A1810","#3B3E40","#0F7015"]
       domain: [1, 25, 60]
     ban_rate:
-      range: ["#7A1810","#3B3E40","#0F7015"]
+      range: ["#0F7015","#3B3E40","#7A1810"]
       domain: [1,10,50]
     win_rate:
       range: ["#7A1810","#3B3E40","#0F7015"]
@@ -20,7 +20,19 @@
       domain: [0,15,30]
     kda:
       range: ["#7A1810","#3B3E40","#0F7015"]
-      domain: [1,2,3]
+      domain: [1.0,2.0,2.5]
+    average_kills:
+      range: ["#7A1810","#3B3E40","#0F7015"]
+      domain: [4,9,14]
+    average_deaths:
+      range: ["#0F7015","#3B3E40","#7A1810"]
+      domain: [9,10,11]
+    average_assists:
+      range: ["#7A1810","#3B3E40","#0F7015"]
+      domain: [4,10,16]
+    penta_kills:
+      range: ["#7A1810","#3B3E40","#0F7015"]
+      domain: [0,10,100]
 
   getInitialState: ->
     if @props and @props.data

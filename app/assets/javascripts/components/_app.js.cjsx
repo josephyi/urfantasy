@@ -17,6 +17,7 @@
       OVERALL_STATS.assists_leaderboard = _.sortBy(OVERALL_STATS.all_data, 'average_assists').reverse()
       OVERALL_STATS.wins_leaderboard = _.sortBy(OVERALL_STATS.all_data, 'win_rate').reverse()
       OVERALL_STATS.fantasy_leaderboard = _.sortBy(OVERALL_STATS.all_data, 'average_score').reverse()
+      OVERALL_STATS.pentakill_leaderboard = _.sortBy(OVERALL_STATS.all_data, 'penta_kills').reverse()
     )
 
 

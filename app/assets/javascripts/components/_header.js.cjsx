@@ -16,10 +16,14 @@
 
   PIVOTS: [
     {name: 'Fantasy Score', selected: true, value:'average_score', size:'matches'}
-    {name: 'Pick/Ban Ratio', selected: true, value:'popularity', size:'wins'}
+    {name: 'Pick/Ban Ratio', selected: true, value:'popularity', size:'matches'}
     {name: 'Win Rate', selected: false, value:'win_rate', size:'matches'}
-    {name: 'Ban Rate', selected: false, value:'ban_rate', size:'wins'}
-    {name: 'KDA', selected: false, value:'kda', size:'kills'}
+    {name: 'Ban Rate', selected: false, value:'ban_rate', size:'matches'}
+    {name: 'Avg Kills', selected: false, value:'average_kills', size:'pick_rate'}
+    {name: 'Avg Deaths', selected: false, value:'average_deaths', size:'pick_rate'}
+    {name: 'Avg Assists', selected: false, value:'average_assists', size:'pick_rate'}
+    {name: 'KDA', selected: false, value:'kda', size:'pick_rate'}
+    {name: 'Pentakills', selected: false, value:'penta_kills', size:'pick_rate'}
   ]
 
   DAYS: [
