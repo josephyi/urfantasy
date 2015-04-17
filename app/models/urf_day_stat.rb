@@ -47,7 +47,7 @@ class UrfDayStat < ActiveRecord::Base
       quadra_kills: quadra_kills,
       average_quadra_kills:  average_quadra_kills,
       penta_kills: penta_kills,
-      average_penta_kills: average_penta_kills,
+      games_to_penta: games_to_penta,
       minions_killed: minions_killed,
       average_minions_killed: average_minions_killed,
       kda: kda.round(2),
@@ -198,10 +198,9 @@ class UrfDayStat < ActiveRecord::Base
     100.to_f * mirror_matches / matches
   end
 
-  # Can't do game bonus. D'Oh!
-  # def game_bonus
-  #   self.stats['kills'] > 10 || self.stats['assists'] > 10 ? GAME_BONUS : 0
-  # end
+  def games_to_penta
+    penta_kills > 0 ? (1.to_f / (penta_kills.to_f / matches.to_f)).to_i : 99999
+  end
 
   def method_missing(symbol, *args)
     symbol_str = symbol.to_s
