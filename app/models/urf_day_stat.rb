@@ -209,7 +209,7 @@ class UrfDayStat < ActiveRecord::Base
     # Get average stats with average_[stat]
     if symbol_str.start_with?('average_')
       return 0 if self.matches == 0
-      return (self.send(symbol_str.gsub('average_','')) / self.matches).round(2)
+      return (self.send(symbol_str.gsub('average_','')) / self.matches.to_f).round(2)
     else
       super
     end
