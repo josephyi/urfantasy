@@ -33,6 +33,9 @@
     penta_kills:
       range: ["#7A1810","#3B3E40","#0F7015"]
       domain: [0,10,100]
+    pick_rate:
+      range: ["#7A1810","#3B3E40","#0F7015"]
+      domain: [0,15,30]
 
   getInitialState: ->
     if @props and @props.data
@@ -76,8 +79,9 @@
         size: data.size || @state.size
 
     PubSub.subscribe 'dropdown.pivot_sizes', (msg, data) =>
-      @setState
-        size: data.value
+      if data.value
+        @setState
+          size: data.value
 
     PubSub.subscribe 'dropdown.pivots', (msg, data) =>
       @setState
@@ -188,8 +192,8 @@
       .attr("xlink:href", (d)-> "http://ddragon.leagueoflegends.com/cdn/5.7.2/img/champion/#{d.key}.png")
       .attr("x", 0)
       .attr("y", 0)
-      .attr("width", 20)
-      .attr("height", 20)
+      .attr("width", 15)
+      .attr("height", 15)
 
     # cells.append("svg:rect")
     #   .attr("class", "cell-tooltip")

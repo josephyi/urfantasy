@@ -17,9 +17,7 @@
   PIVOT_SIZES: [
     {name: 'Matches', selected: true, value: 'matches'}
     {name: 'Pick/Ban Ratio', selected: false, value:'popularity'}
-    {name: 'Pick Rate', selected: false, value: 'pick_rate'}
     {name: 'Win Rate', selected: false, value: 'win_rate'}
-    {name: 'Ban Rate', selected: false, value:'ban_rate'}
     {name: 'Avg Kills', selected: false, value:'average_kills'}
     {name: 'Avg Deaths', selected: false, value:'average_deaths'}
     {name: 'Avg Assists', selected: false, value:'average_assists'}
@@ -30,7 +28,8 @@
 
   PIVOTS: [
     {name: 'Fantasy Score', selected: true, value:'average_score'}
-    {name: 'Pick/Ban Ratio', selected: true, value:'popularity'}
+    {name: 'Pick Rate', selected: false, value:'pick_rate'}
+    {name: 'Pick/Ban Ratio', selected: false, value:'popularity'}
     {name: 'Win Rate', selected: false, value:'win_rate'}
     {name: 'Ban Rate', selected: false, value:'ban_rate'}
     {name: 'Avg Kills', selected: false, value:'average_kills'}
@@ -38,7 +37,7 @@
     {name: 'Avg Assists', selected: false, value:'average_assists'}
     {name: 'KDA', selected: false, value:'kda'}
     {name: 'Pentakills', selected: false, value:'penta_kills'}
-    {name: 'Matches', selected: false, value:'matches'}
+
   ]
 
   DAYS: [
@@ -71,12 +70,12 @@
     return (
       <div className="ui secondary menu app-header">
         <div className="left menu">
-          <h3><a href='#' onClick={@home}>For What It's Urf</a></h3>
+          <h3><a href='#' onClick={@home}>For What It's URF</a></h3>
         </div>
-        <Dropdown items={@REGIONS} title="regions" />
-        <Dropdown items={@DAYS} title="days" />
-        <Dropdown items={@PIVOT_SIZES} title="pivot_sizes" />
-        <Dropdown items={@PIVOTS} title="pivots" />
+        <Dropdown items={@REGIONS} title="regions" label="Region: " />
+        <Dropdown items={@DAYS} title="days" label="Day: " />
+        <Dropdown items={@PIVOT_SIZES} title="pivot_sizes" label="Size By: " />
+        <Dropdown items={@PIVOTS} title="pivots" label="Color By: " />
         <a href="#" className="left menu about-link" onClick={@about}>About</a>
         <div className="ui right vertical menu app-header-search">
           <Menu />

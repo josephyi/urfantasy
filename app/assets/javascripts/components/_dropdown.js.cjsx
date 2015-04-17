@@ -8,7 +8,9 @@
 
   select: (item,event) ->
     event.preventDefault()
+    App.router.navigate("/", true)
     PubSub.publish "dropdown.#{@state.title}", item
+    PubSub.publish 'sidebar', {isOpen: false}
     @setState
       selected: item
       active: false
@@ -32,6 +34,7 @@
 
     return (
       <div className={label_class} onClick={@toggle}>
+        <span class="text">{@state.label}</span>
         <div className="text">{@state.selected.name}</div>
         <i className="dropdown icon"></i>
         <div className={menu_class}>
