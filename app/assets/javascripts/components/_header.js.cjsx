@@ -14,16 +14,31 @@
     {name: 'ru', selected: false, value: 'ru'}
   ]
 
+  PIVOT_SIZES: [
+    {name: 'Matches', selected: true, value: 'matches'}
+    {name: 'Pick/Ban Ratio', selected: false, value:'popularity'}
+    {name: 'Pick Rate', selected: false, value: 'pick_rate'}
+    {name: 'Win Rate', selected: false, value: 'win_rate'}
+    {name: 'Ban Rate', selected: false, value:'ban_rate'}
+    {name: 'Avg Kills', selected: false, value:'average_kills'}
+    {name: 'Avg Deaths', selected: false, value:'average_deaths'}
+    {name: 'Avg Assists', selected: false, value:'average_assists'}
+    {name: 'KDA', selected: false, value:'kda'}
+    {name: 'Pentakills', selected: false, value:'penta_kills'}
+    {name: 'Fantasy Score', selected: false, value:'average_score'}
+  ]
+
   PIVOTS: [
-    {name: 'Fantasy Score', selected: true, value:'average_score', size:'matches'}
-    {name: 'Pick/Ban Ratio', selected: true, value:'popularity', size:'matches'}
-    {name: 'Win Rate', selected: false, value:'win_rate', size:'matches'}
-    {name: 'Ban Rate', selected: false, value:'ban_rate', size:'matches'}
-    {name: 'Avg Kills', selected: false, value:'average_kills', size:'pick_rate'}
-    {name: 'Avg Deaths', selected: false, value:'average_deaths', size:'pick_rate'}
-    {name: 'Avg Assists', selected: false, value:'average_assists', size:'pick_rate'}
-    {name: 'KDA', selected: false, value:'kda', size:'pick_rate'}
-    {name: 'Pentakills', selected: false, value:'penta_kills', size:'pick_rate'}
+    {name: 'Fantasy Score', selected: true, value:'average_score'}
+    {name: 'Pick/Ban Ratio', selected: true, value:'popularity'}
+    {name: 'Win Rate', selected: false, value:'win_rate'}
+    {name: 'Ban Rate', selected: false, value:'ban_rate'}
+    {name: 'Avg Kills', selected: false, value:'average_kills'}
+    {name: 'Avg Deaths', selected: false, value:'average_deaths'}
+    {name: 'Avg Assists', selected: false, value:'average_assists'}
+    {name: 'KDA', selected: false, value:'kda'}
+    {name: 'Pentakills', selected: false, value:'penta_kills'}
+    {name: 'Matches', selected: false, value:'matches'}
   ]
 
   DAYS: [
@@ -60,6 +75,7 @@
         </div>
         <Dropdown items={@REGIONS} title="regions" />
         <Dropdown items={@DAYS} title="days" />
+        <Dropdown items={@PIVOT_SIZES} title="pivot_sizes" />
         <Dropdown items={@PIVOTS} title="pivots" />
         <a href="#" className="left menu about-link" onClick={@about}>About</a>
         <div className="ui right vertical menu app-header-search">

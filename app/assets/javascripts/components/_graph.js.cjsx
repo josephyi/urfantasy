@@ -35,12 +35,12 @@
     expand_class = "chevron right icon"
     expand_class = "chevron down icon" if @state.isOpen
 
-    expand = <i className={expand_class} onClick={@test}></i> if @props.values?.length
+    expand = <i className={expand_class}></i> if @props.values?.length
 
     return (
       <div className="bar-graph">
         <div className="bar-graph-title">{@props.title}</div>
-        <div className="bar-graph-data">
+        <div className="bar-graph-data" onClick={@test}>
           <div className="bar-graph-data-value" style={width:width,background:background}></div>
           <div className="bar-graph-value">{value}</div>
           {expand}

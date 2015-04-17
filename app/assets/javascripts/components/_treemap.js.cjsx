@@ -73,11 +73,15 @@
       @setState
         day: data.value
       @_get_data()
+        size: data.size || @state.size
+
+    PubSub.subscribe 'dropdown.pivot_sizes', (msg, data) =>
+      @setState
+        size: data.value
 
     PubSub.subscribe 'dropdown.pivots', (msg, data) =>
       @setState
         color: data.value
-        size: data.size || @state.size
 
   _unsubscribeFromEvents: ->
     PubSub.unsubscribe 'dropdown'
