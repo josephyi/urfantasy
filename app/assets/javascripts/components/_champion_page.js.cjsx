@@ -46,7 +46,11 @@
       @setState response
     )
 
-
+  scroll: (event) ->
+    event.preventDefault()
+    $('.app-main').animate({
+      scrollTop: $('.champion-section-title').first().offset().top - 50
+    }, 1000)
 
   render: ->
     return (<LoadingIndicator />) unless @state.avg_kill_stats?
@@ -85,6 +89,7 @@
             <Badge value={@props.assists_rank} title="Assists" color={color(@props.assists_rank)} />
             <Badge value={@props.wins_rank} title="Wins" color={color(@props.wins_rank)} />
           </div>
+          <i className="icon angle down" onClick={@scroll}></i>
         </div>
         <h2 className="champion-section-title">Game Stats</h2>
         <div className="bar-graphs">

@@ -2,7 +2,7 @@
 
   render: ->
     range = ["#7A1810","#D9C007","#0F7015"]
-    domain = [@props.min,(@props.max/2),@props.max]
+    domain = [@props.min,((@props.max+@props.min)/2),@props.max]
     color = d3.scale.linear()
       .range(range)
       .domain(domain)
@@ -10,7 +10,7 @@
 
     color = color.range(range.reverse()) if @props.reverse
 
-    width = (@props.value / @props.max) * 100
+    width = ((@props.value-@props.min) / (@props.max-@props.min)) * 100
     background = color(@props.value)
     width = "#{width}%"
 
