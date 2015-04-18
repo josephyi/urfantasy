@@ -10,6 +10,7 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require google_analytics
 //= require jquery
 //= require vendor/underscore
 //= require vendor/pubsub
