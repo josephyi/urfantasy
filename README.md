@@ -3,7 +3,8 @@
 Live Site: [For What It's URF](http://4urf.com)
 
 Created for Riot Games API Challenge, what started as a fantasy scoring
-application ended up turning into a data exploration application. Rather than
+application (hence the name 'urfantasy')
+ended up turning into a data exploration application. Rather than
 using strictly familiar technologies, my duo queue partner for this project,
 [dbanksdesign](https://github.com/dbanksdesign), and I also incorporated new/trendy
 stuff (at least to us) such as Docker, ReactJS, D3.js, and Postgres
