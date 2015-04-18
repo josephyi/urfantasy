@@ -10,20 +10,10 @@
 
 
   _get_rankings: ->
-    for champ, i in OVERALL_STATS.assists_leaderboard
-      i++
-      if champ.id.toString() is @props.champion_id
-        @props.assists_rank = i
-        break
     for champ, i in OVERALL_STATS.kills_leaderboard
       i++
       if champ.id.toString() is @props.champion_id
         @props.kills_rank = i
-        break
-    for champ, i in OVERALL_STATS.kills_leaderboard
-      i++
-      if champ.id.toString() is @props.champion_id
-        @props.deaths_rank = i
         break
     for champ, i in OVERALL_STATS.wins_leaderboard
       i++
